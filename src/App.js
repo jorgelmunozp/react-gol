@@ -1,0 +1,318 @@
+import logo from './logo.svg';
+import balon from './balon.png';
+import jugador1 from './jugador1.png';
+import jugador2 from './jugador2.png';
+import jugadorCPU1 from './jugador2.png';
+import './App.css';
+
+import React, { useState, useEffect } from 'react';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faFutbol,faTshirt,faClock,faPlayCircle } from '@fortawesome/fontawesome-free-solid'
+
+const balonH = -30;
+const balonV = 390;
+const jugador1H = -400;
+const jugador1V = 360;
+const jugador2H = 300;
+const jugador2V = 360;
+{/** const jugadorCPU1H = 150;
+const jugadorCPU1V = 160; */}
+const jugadorCPU1H = 300;
+const jugadorCPU1V = 360;
+const porteria1H = 50;
+const porteria1V = 352;
+const porteria2H = 1255;
+const porteria2V = 352;
+
+function App() {
+  let [posicionHbalon, setPosicionHbalon] = useState(balonH);
+  let [posicionVbalon, setPosicionVbalon] = useState(balonV);
+  let [posicionHjugador1, setPosicionHjugador1] = useState(jugador1H);
+  let [posicionVjugador1, setPosicionVjugador1] = useState(jugador1V);
+  let [posicionHjugador2, setPosicionHjugador2] = useState(jugador2H);
+  let [posicionVjugador2, setPosicionVjugador2] = useState(jugador2V);
+  let [posicionHjugadorCPU1, setPosicionHjugadorCPU1] = useState(jugadorCPU1H);
+  let [posicionVjugadorCPU1, setPosicionVjugadorCPU1] = useState(jugadorCPU1V);
+  let [posicionHporteria1, setPosicionHporteria1] = useState(porteria1H);
+  let [posicionVporteria1, setPosicionVporteria1] = useState(porteria1V);
+  let [posicionHporteria2, setPosicionHporteria2] = useState(porteria2H);
+  let [posicionVporteria2, setPosicionVporteria2] = useState(porteria2V);
+  let [golesEquipo1, setGolesEquipo1] = useState(0);
+  let [golesEquipo2, setGolesEquipo2] = useState(0);
+  let [estado, setEstado] = useState('');
+  
+  const teclaUp1 = useTeclado("w");                   //Flechas del teclado
+  const teclaDown1 = useTeclado("s");                 // Jugador 1
+  const teclaLeft1 = useTeclado("a");
+  const teclaRight1 = useTeclado("e");
+  const teclaUp2 = useTeclado("ArrowUp");            // Jugador 2
+  const teclaDown2 = useTeclado("ArrowDown");
+  const teclaLeft2 = useTeclado("ArrowLeft");
+  const teclaRight2 = useTeclado("ArrowRight");
+
+  const [seconds, setSeconds] = useState(0);
+
+  const Tiempo = () => { 
+    useEffect(() => {
+      const interval = setInterval(() => {
+        console.log(estado);
+        if(estado === 'start'){
+          setSeconds(seconds => seconds + 1);
+        }
+      }, 1000);
+      return () => clearInterval(interval);
+    }, []);
+  
+    return (<p>{seconds}</p>);
+  };
+
+  const TickJugadorCPU1 = () => {
+    useEffect(() => {
+      const interval = setInterval(() => {
+        if(estado === 'start'){
+          movimientosJugadorCPU1(estado,posicionHbalon,setPosicionHbalon,posicionVbalon,setPosicionVbalon,posicionHjugadorCPU1,setPosicionHjugadorCPU1,posicionVjugadorCPU1,setPosicionVjugadorCPU1,posicionHporteria1,posicionVporteria1);
+          checkGol(posicionHbalon,setPosicionHbalon,posicionVbalon,setPosicionVbalon,posicionHporteria1,posicionVporteria1,posicionHporteria2,posicionVporteria2,posicionHjugador1,setPosicionHjugador1,posicionVjugador1,setPosicionVjugador1,posicionHjugador2,setPosicionHjugador2,posicionVjugador2,setPosicionVjugador2,golesEquipo1,setGolesEquipo1,golesEquipo2,setGolesEquipo2);
+
+        }
+      }, 1);
+      return () => clearInterval(interval);
+    }, []);
+  
+    return (<p>{movimientosJugadorCPU1}</p>);
+  };
+
+  return (
+    <div className="App">
+      <header className="App-header">
+      {<TickJugadorCPU1/>}
+        <table className='App-slogan'>
+          <tr>
+            <td><img src={logo} className="App-logo"/></td>
+            <td><h2 className="App-titulo">Gol</h2></td>
+            <td><h2><FontAwesomeIcon icon={faFutbol}/></h2></td>
+          </tr>
+        </table> 
+        <table className='tiempo'>
+          <tr>
+            <td><h2><FontAwesomeIcon icon={faClock}/></h2></td>
+            <td>&nbsp;</td>
+            <td><h2>{<Tiempo/>}</h2></td>
+          </tr>
+        </table> 
+        <table className='marcador'>
+          <tr>
+            <td><button type="button" onClick={(e) => botonStart(e,estado,setEstado)} onKeyDown={(e) => flechasTeclado(e,posicionHjugador1,setPosicionHjugador1,posicionVjugador1,setPosicionVjugador1,posicionHjugador2,setPosicionHjugador2,posicionVjugador2,setPosicionVjugador2,posicionHbalon,setPosicionHbalon,posicionVbalon,setPosicionVbalon,posicionHporteria1,posicionVporteria1,posicionHporteria2,posicionVporteria2,golesEquipo1,setGolesEquipo1,golesEquipo2,setGolesEquipo2)} className='botonStart' value="start"><FontAwesomeIcon icon={faPlayCircle}/></button></td>
+            <td><h2><FontAwesomeIcon icon={faTshirt} style={{'color':'blue'}}/>&nbsp;</h2></td>
+            <td><h2>{golesEquipo1}</h2></td>
+            <td>&nbsp;</td>
+            <td><h2>-</h2></td>
+            <td>&nbsp;</td>
+            <td><h2>{golesEquipo2}</h2></td>
+            <td>&nbsp;</td>
+            <td><h2><FontAwesomeIcon icon={faTshirt} style={{'color':'red'}}/>&nbsp;</h2></td>
+          </tr>
+        </table> 
+      </header>
+      <body className="App-body">
+        <div className='cancha'>
+          <hr className='porteria' style={{'marginTop':posicionVporteria1,'marginLeft':posicionHporteria1}}/>
+          <hr className='porteria' style={{'marginTop':posicionVporteria2,'marginLeft':posicionHporteria2}}/>
+          <img src={jugador1} className="jugador" style={{'marginTop':posicionVjugador1,'marginLeft':posicionHjugador1}}/>
+          <img src={jugadorCPU1} className="jugador" style={{'marginTop':posicionVjugadorCPU1,'marginLeft':posicionHjugadorCPU1}}/>
+  {/*        <img src={jugador2} className="jugador" style={{'marginTop':posicionVjugador2,'marginLeft':posicionHjugador2}}/>
+   */}     <img src={balon} className="balon" style={{'marginTop':posicionVbalon,'marginLeft':posicionHbalon}}/>
+        </div>
+      </body>
+    </div>
+  );
+}
+
+function botonStart(e,estado,setEstado){     //Función para iniciar el juego
+  e.preventDefault();                            
+  estado = 'start';
+  setEstado(estado);
+}
+
+function useTeclado(targetKey) {        // Hook que detecta el Teclado
+  const [keyPressed, setKeyPressed] = useState(false);     // State for keeping track of whether key is pressed
+  function downHandler({ key }) {       // If pressed key is our target key then set to true
+    if (key === targetKey) {
+      setKeyPressed(true);
+    }
+  }
+  const upHandler = ({ key }) => {    // If released key is our target key then set to false
+    if (key === targetKey) {
+      setKeyPressed(false);
+    }
+  };
+  useEffect(() => {                 // Add event listeners
+    window.addEventListener("keydown", downHandler);
+    window.addEventListener("keyup", upHandler);
+    return () => {                 // Remove event listeners on cleanup
+      window.removeEventListener("keydown", downHandler);
+      window.removeEventListener("keyup", upHandler);
+    };
+  }, []);     // Empty array ensures that effect is only run on mount and unmount
+  return keyPressed;
+}
+function flechasTeclado(e,posicionHjugador1,setPosicionHjugador1,posicionVjugador1,setPosicionVjugador1,posicionHjugador2,setPosicionHjugador2,posicionVjugador2,setPosicionVjugador2,posicionHbalon,setPosicionHbalon,posicionVbalon,setPosicionVbalon,posicionHporteria1,posicionVporteria1,posicionHporteria2,posicionVporteria2,golesEquipo1,setGolesEquipo1,golesEquipo2,setGolesEquipo2,posicionHjugadorCPU1,posicionVjugadorCPU1) {     //Función para sensar las flechas del teclado
+  if (e.key === 'ArrowUp'){                  //Jugador 1
+    if(posicionVjugador1 > -50){
+      posicionVjugador1= posicionVjugador1 - 10;
+      setPosicionVjugador1(posicionVjugador1);
+    }
+  }   
+  if (e.key === 'ArrowDown'){
+    if(posicionVjugador1 < 670){
+      posicionVjugador1= posicionVjugador1 + 10;
+      setPosicionVjugador1(posicionVjugador1);
+    }
+  }
+  if (e.key === 'ArrowLeft'){
+    if(posicionHjugador1 > -630){
+      posicionHjugador1 = posicionHjugador1 - 10;
+      setPosicionHjugador1(posicionHjugador1);
+    }
+  }   
+  if (e.key === 'ArrowRight'){
+    if(posicionHjugador1 < 520){
+      posicionHjugador1 = posicionHjugador1 + 10;
+      setPosicionHjugador1(posicionHjugador1);
+    }
+  }
+
+  if (e.key === 'w'){                  //Jugador 2
+    if(posicionVjugador2 > -50){
+      posicionVjugador2 = posicionVjugador2 - 10;
+      setPosicionVjugador2(posicionVjugador2);
+    }
+  }   
+  if (e.key === 's'){
+    if(posicionVjugador2 < 670){
+      posicionVjugador2 = posicionVjugador2 + 10;
+      setPosicionVjugador2(posicionVjugador2);
+    }
+  }
+  if (e.key === 'a'){
+    if(posicionHjugador2 > -630){
+      posicionHjugador2 = posicionHjugador2 - 10;
+      setPosicionHjugador2(posicionHjugador2);
+    }
+  }   
+  if (e.key === 'd'){
+    if(posicionHjugador2 < 512){
+      posicionHjugador2 = posicionHjugador2 + 10;
+      setPosicionHjugador2(posicionHjugador2);
+    }
+  }
+  checkPosicionBalon(e,posicionHbalon,setPosicionHbalon,posicionVbalon,setPosicionVbalon,posicionHjugador1,posicionVjugador1,posicionHjugador2,posicionVjugador2,posicionHjugadorCPU1,posicionVjugadorCPU1);
+}
+
+function checkPosicionBalon(e,posicionHbalon,setPosicionHbalon,posicionVbalon,setPosicionVbalon,posicionHjugador1,posicionVjugador1,posicionHjugador2,posicionVjugador2,posicionHjugadorCPU1,posicionVjugadorCPU1) {
+  if((posicionHbalon - 40  < posicionHjugador1 && posicionHjugador1 < posicionHbalon + 40) &&
+     (posicionVbalon - 70  < posicionVjugador1 && posicionVjugador1 < posicionVbalon + 20)
+  ){
+    posicionHbalon = posicionHjugador1+24;
+    posicionVbalon = posicionVjugador1+50;
+  }
+  if((posicionHbalon - 40  < posicionHjugador2 && posicionHjugador2 < posicionHbalon + 40) &&
+     (posicionVbalon - 70  < posicionVjugador2 && posicionVjugador2 < posicionVbalon + 20)
+  ){
+    posicionHbalon = posicionHjugador2+24;
+    posicionVbalon = posicionVjugador2+50;
+  }
+  if((posicionHbalon - 40  < posicionHjugadorCPU1 && posicionHjugadorCPU1 < posicionHbalon + 40) &&
+     (posicionVbalon - 70  < posicionVjugadorCPU1 && posicionVjugadorCPU1 < posicionVbalon + 20)
+  ){
+    posicionHbalon = posicionHjugadorCPU1+24;
+    posicionVbalon = posicionVjugadorCPU1+50;
+  }
+  setPosicionHbalon(posicionHbalon)
+  setPosicionVbalon(posicionVbalon);
+}
+
+function checkGol(posicionHbalon,setPosicionHbalon,posicionVbalon,setPosicionVbalon,posicionHporteria1,posicionVporteria1,posicionHporteria2,posicionVporteria2,posicionHjugador1,setPosicionHjugador1,posicionVjugador1,setPosicionVjugador1,posicionHjugador2,setPosicionHjugador2,posicionVjugador2,setPosicionVjugador2,golesEquipo1,setGolesEquipo1,golesEquipo2,setGolesEquipo2) {
+  if((posicionHbalon + 656 === posicionHporteria1) &&
+    (posicionVporteria1 - 20  < posicionVbalon && posicionVbalon < posicionVporteria1 + 80)
+  ){
+    golesEquipo2++;
+    setGolesEquipo2(golesEquipo2);
+    posicionHbalon = balonH;
+    setPosicionHbalon(posicionHbalon)
+    posicionVbalon = balonV;
+    setPosicionVbalon(posicionVbalon);
+    posicionHjugador1 = jugador1H;
+    setPosicionHjugador1(posicionHjugador1);
+    posicionVjugador1 = jugador1V;
+    setPosicionVjugador1(posicionVjugador1);
+    posicionHjugador2 = jugador2H;
+    setPosicionHjugador2(posicionHjugador2);
+    posicionVjugador2 = jugador2V;
+    setPosicionVjugador2(posicionVjugador2);
+  }
+  if((posicionHbalon + 711 === posicionHporteria2) &&
+    (posicionVporteria2 - 20  < posicionVbalon && posicionVbalon < posicionVporteria2 + 80)
+  ){
+    golesEquipo1++;
+    setGolesEquipo1(golesEquipo1);
+    posicionHbalon = balonH;
+    setPosicionHbalon(posicionHbalon)
+    posicionVbalon = balonV;
+    setPosicionVbalon(posicionVbalon);
+    posicionHjugador1 = jugador1H;
+    setPosicionHjugador1(posicionHjugador1);
+    posicionVjugador1 = jugador1V;
+    setPosicionVjugador1(posicionVjugador1);
+    posicionHjugador2 = jugador2H;
+    setPosicionHjugador2(posicionHjugador2);
+    posicionVjugador2 = jugador2V;
+    setPosicionVjugador2(posicionVjugador2);
+  }
+}
+
+function movimientosJugadorCPU1(estado,posicionHbalon,setPosicionHbalon,posicionVbalon,setPosicionVbalon,posicionHjugadorCPU1,setPosicionHjugadorCPU1,posicionVjugadorCPU1,setPosicionVjugadorCPU1,posicionHporteria1,posicionVporteria1) {
+  if(estado === 'start'){
+    if(posicionHbalon > posicionHjugadorCPU1 && posicionVbalon > posicionVjugadorCPU1){           //Hace que el Gusano persiga a Toto
+      posicionHjugadorCPU1 = posicionHjugadorCPU1 + 1;
+      posicionVjugadorCPU1 = posicionVjugadorCPU1 + 1;
+    } else if(posicionHbalon > posicionHjugadorCPU1 && posicionVbalon < posicionVjugadorCPU1){           
+      posicionHjugadorCPU1 = posicionHjugadorCPU1 + 1;
+      posicionVjugadorCPU1 = posicionVjugadorCPU1 - 1;
+    } else if(posicionHbalon === posicionHjugadorCPU1 && posicionVbalon > posicionVjugadorCPU1){     
+      posicionVjugadorCPU1 = posicionVjugadorCPU1 + 1;
+    } else if(posicionHbalon === posicionHjugadorCPU1 && posicionVbalon < posicionVjugadorCPU1){  
+      posicionVjugadorCPU1 = posicionVjugadorCPU1 - 1;
+    } else if(posicionHbalon < posicionHjugadorCPU1 && posicionVbalon > posicionVjugadorCPU1){
+      posicionHjugadorCPU1 = posicionHjugadorCPU1 - 1;
+      posicionVjugadorCPU1 = posicionVjugadorCPU1 + 1;
+    } else if(posicionHbalon < posicionHjugadorCPU1 && posicionVbalon < posicionVjugadorCPU1){
+      posicionHjugadorCPU1 = posicionHjugadorCPU1 - 1;
+      posicionVjugadorCPU1 = posicionVjugadorCPU1 - 1;
+    } else if(posicionHbalon > posicionHjugadorCPU1 && posicionVbalon === posicionVjugadorCPU1){           //Hace que el Gusano persiga a Toto
+      posicionHjugadorCPU1 = posicionHjugadorCPU1 + 1;
+    } else if(posicionHbalon < posicionHjugadorCPU1 && posicionVbalon === posicionVjugadorCPU1){           //Hace que el Gusano persiga a Toto
+      posicionHjugadorCPU1 = posicionHjugadorCPU1 - 1;
+    } else if(posicionHbalon === posicionHjugadorCPU1 && posicionVbalon === posicionVjugadorCPU1){
+        if((posicionHporteria1 === posicionHjugadorCPU1 || posicionHporteria1 > posicionHjugadorCPU1 || posicionHporteria1 < posicionHjugadorCPU1) && posicionVporteria1 === posicionVjugadorCPU1){
+          posicionHjugadorCPU1 = posicionHjugadorCPU1 - 1;
+        } else if((posicionHporteria1 === posicionHjugadorCPU1 || posicionHporteria1 > posicionHjugadorCPU1 || posicionHporteria1 < posicionHjugadorCPU1) && posicionVporteria1 > posicionVjugadorCPU1){
+          posicionHjugadorCPU1 = posicionHjugadorCPU1 - 1;
+          posicionVjugadorCPU1 = posicionVjugadorCPU1 + 1;
+        } else if((posicionHporteria1 === posicionHjugadorCPU1 || posicionHporteria1 > posicionHjugadorCPU1 || posicionHporteria1 < posicionHjugadorCPU1) && posicionVporteria1 < posicionVjugadorCPU1){
+          posicionHjugadorCPU1 = posicionHjugadorCPU1 - 1;
+          posicionVjugadorCPU1 = posicionVjugadorCPU1 - 1;
+        }
+      posicionHbalon = posicionHjugadorCPU1;
+      posicionVbalon = posicionVjugadorCPU1;
+    }
+    setPosicionHbalon(posicionHbalon);
+    setPosicionVbalon(posicionVbalon);
+    setPosicionHjugadorCPU1(posicionHjugadorCPU1);
+    setPosicionVjugadorCPU1(posicionVjugadorCPU1);
+  }
+}
+
+
+
+export default App;

@@ -1,0 +1,96 @@
+.App {
+  text-align: center;
+  font: 'Century Gothic', sans-serif;  
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: calc(30px + 3vmin);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(8px + 2vmin);
+  color: white;
+  
+  background-color: rgba(0, 0, 0, 0.3);
+  position: absolute;
+  width: 100%;                 
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 1);
+}
+.App-slogan {
+  position: absolute;
+  pointer-events: none;
+  left: 3vw;
+  top: -4vh;
+}
+.App-logo {
+  height: calc(10px + 5vmin);
+  pointer-events: none;
+  margin-top: 1vh;
+}
+.App-titulo{
+  pointer-events: none;
+}
+.tiempo {
+  position: absolute;
+  top: -4vh;
+}
+.marcador {
+  position: absolute;
+  right: 3vw;
+  top: -4vh;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.App-body {
+  background-color: #5c8344;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.cancha {
+  background: url("/public/cancha.jpg") no-repeat;
+  background-size:100%;
+  width: 80vw;
+  height: 100vh;
+  margin-top: 3vh;
+}
+
+.balon {
+  height: calc(20px + 5vmin);
+  pointer-events: none;
+  position: absolute;
+  user-select: none;                    /* Impide seleccionar la imagen con el mouse*/
+  -moz-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+.jugador {
+  height: calc(30px + 10vmin);
+  pointer-events: none;
+  position: absolute;
+  user-select: none;                    /* Impide seleccionar la imagen con el mouse*/
+  -moz-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+.porteria {
+  position: absolute;
+  border: none;
+  border-left: 1px solid transparent;
+  height: 15vh;
+  width: 1px;  
+}
