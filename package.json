@@ -1,5 +1,6 @@
 {
-  "name": "gol",
+  "name": "react-gol",
+  "homepage": "https://jorgelmunozp.github.io/react-gol/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -11,6 +12,7 @@
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
+    "gh-pages": "^6.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-native": "^0.67.1",
@@ -19,6 +21,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

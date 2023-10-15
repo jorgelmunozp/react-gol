@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+import logo from './logo.png';
 import balon from './balon.png';
 import jugador1 from './jugador1.png';
 import jugador2 from './jugador2.png';
@@ -87,31 +87,39 @@ function App() {
       <header className="App-header">
       {<TickJugadorCPU1/>}
         <table className='App-slogan'>
-          <tr>
-            <td><img src={logo} className="App-logo"/></td>
-            <td><h2 className="App-titulo">Gol</h2></td>
-            <td><h2><FontAwesomeIcon icon={faFutbol}/></h2></td>
-          </tr>
+          <tbody>
+            <tr>
+              <td><img src={logo} className="App-logo"/></td>
+              <td>&nbsp;</td>
+              <td><h2 className="App-titulo">Gol</h2></td>
+              <td>&nbsp;</td>
+              <td><h2><FontAwesomeIcon icon={faFutbol}/></h2></td>
+            </tr>
+          </tbody>
         </table> 
         <table className='tiempo'>
-          <tr>
-            <td><h2><FontAwesomeIcon icon={faClock}/></h2></td>
-            <td>&nbsp;</td>
-            <td><h2>{<Tiempo/>}</h2></td>
-          </tr>
+          <tbody>
+            <tr>
+              <td><h2><FontAwesomeIcon icon={faClock}/></h2></td>
+              <td>&nbsp;</td>
+              <td><h2>{<Tiempo/>}</h2></td>
+            </tr>
+          </tbody>
         </table> 
         <table className='marcador'>
-          <tr>
-            <td><button type="button" onClick={(e) => botonStart(e,estado,setEstado)} onKeyDown={(e) => flechasTeclado(e,posicionHjugador1,setPosicionHjugador1,posicionVjugador1,setPosicionVjugador1,posicionHjugador2,setPosicionHjugador2,posicionVjugador2,setPosicionVjugador2,posicionHbalon,setPosicionHbalon,posicionVbalon,setPosicionVbalon,posicionHporteria1,posicionVporteria1,posicionHporteria2,posicionVporteria2,golesEquipo1,setGolesEquipo1,golesEquipo2,setGolesEquipo2)} className='botonStart' value="start"><FontAwesomeIcon icon={faPlayCircle}/></button></td>
-            <td><h2><FontAwesomeIcon icon={faTshirt} style={{'color':'blue'}}/>&nbsp;</h2></td>
-            <td><h2>{golesEquipo1}</h2></td>
-            <td>&nbsp;</td>
-            <td><h2>-</h2></td>
-            <td>&nbsp;</td>
-            <td><h2>{golesEquipo2}</h2></td>
-            <td>&nbsp;</td>
-            <td><h2><FontAwesomeIcon icon={faTshirt} style={{'color':'red'}}/>&nbsp;</h2></td>
-          </tr>
+          <tbody>
+            <tr>
+              <td><button type="button" onClick={(e) => botonStart(e,estado,setEstado)} onKeyDown={(e) => flechasTeclado(e,posicionHjugador1,setPosicionHjugador1,posicionVjugador1,setPosicionVjugador1,posicionHjugador2,setPosicionHjugador2,posicionVjugador2,setPosicionVjugador2,posicionHbalon,setPosicionHbalon,posicionVbalon,setPosicionVbalon,posicionHporteria1,posicionVporteria1,posicionHporteria2,posicionVporteria2,golesEquipo1,setGolesEquipo1,golesEquipo2,setGolesEquipo2)} className='botonStart' value="start"><FontAwesomeIcon icon={faPlayCircle}/></button></td>
+              <td><h2><FontAwesomeIcon icon={faTshirt} style={{'color':'#3f48cc'}}/>&nbsp;</h2></td>
+              <td><h2>{golesEquipo1}</h2></td>
+              <td>&nbsp;</td>
+              <td><h2>-</h2></td>
+              <td>&nbsp;</td>
+              <td><h2>{golesEquipo2}</h2></td>
+              <td>&nbsp;</td>
+              <td><h2><FontAwesomeIcon icon={faTshirt} style={{'color':'red'}}/>&nbsp;</h2></td>
+            </tr>
+          </tbody>
         </table> 
       </header>
       <body className="App-body">
