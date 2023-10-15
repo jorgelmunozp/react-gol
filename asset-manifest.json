@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/react-gol/static/css/main.623e986e.css",
+    "main.js": "/react-gol/static/js/main.c2ac3884.js",
+    "static/js/787.ad6ec5f8.chunk.js": "/react-gol/static/js/787.ad6ec5f8.chunk.js",
+    "static/media/cancha.jpg": "/react-gol/static/media/cancha.776053b8598c1dbeb49c.jpg",
+    "static/media/balon.png": "/react-gol/static/media/balon.96919a9053631357e18a.png",
+    "static/media/jugador2.png": "/react-gol/static/media/jugador2.fda930625763bd68bad1.png",
+    "static/media/jugador1.png": "/react-gol/static/media/jugador1.fcd84002403b96817668.png",
+    "static/media/logo.png": "/react-gol/static/media/logo.713961e30e9ec2c3ab9c.png",
+    "index.html": "/react-gol/index.html",
+    "main.623e986e.css.map": "/react-gol/static/css/main.623e986e.css.map",
+    "main.c2ac3884.js.map": "/react-gol/static/js/main.c2ac3884.js.map",
+    "787.ad6ec5f8.chunk.js.map": "/react-gol/static/js/787.ad6ec5f8.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.623e986e.css",
+    "static/js/main.c2ac3884.js"
+  ]
+}
