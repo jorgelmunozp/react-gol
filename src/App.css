@@ -12,7 +12,6 @@
   justify-content: center;
   font-size: calc(8px + 2vmin);
   color: white;
-  
   background-color: rgba(0, 0, 0, 0.3);
   position: absolute;
   width: 100%;                 
@@ -85,6 +84,14 @@
   -webkit-user-drag: none;
   -webkit-user-select: none;
   -ms-user-select: none;
+}
+#jugador1 {
+  margin-left: -36vw;
+  margin-top: 42vh;
+}
+#jugadorCPU1 {
+  margin-left: 29vw;
+  margin-top: 42vh;
 }
 
 .porteria {

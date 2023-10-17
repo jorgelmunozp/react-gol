@@ -11,19 +11,19 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFutbol,faTshirt,faClock,faPlayCircle } from '@fortawesome/fontawesome-free-solid'
 
 const balonH = -30;
-const balonV = 390;
+const balonV = 300;
 const jugador1H = -400;
-const jugador1V = 360;
+const jugador1V = 270;
 const jugador2H = 300;
-const jugador2V = 360;
+const jugador2V = 270;
 {/** const jugadorCPU1H = 150;
 const jugadorCPU1V = 160; */}
 const jugadorCPU1H = 300;
-const jugadorCPU1V = 360;
+const jugadorCPU1V = 270;
 const porteria1H = 50;
-const porteria1V = 352;
+const porteria1V = 262;
 const porteria2H = 1255;
-const porteria2V = 352;
+const porteria2V = 262;
 
 function App() {
   let [posicionHbalon, setPosicionHbalon] = useState(balonH);
@@ -126,7 +126,7 @@ function App() {
         <div className='cancha'>
           <hr className='porteria' style={{'marginTop':posicionVporteria1,'marginLeft':posicionHporteria1}}/>
           <hr className='porteria' style={{'marginTop':posicionVporteria2,'marginLeft':posicionHporteria2}}/>
-          <img src={jugador1} className="jugador" style={{'marginTop':posicionVjugador1,'marginLeft':posicionHjugador1}}/>
+          <img id='jugador1' src={jugador1} className="jugador" style={{'marginTop':posicionVjugador1,'marginLeft':posicionHjugador1}}/>
           <img src={jugadorCPU1} className="jugador" style={{'marginTop':posicionVjugadorCPU1,'marginLeft':posicionHjugadorCPU1}}/>
   {/*        <img src={jugador2} className="jugador" style={{'marginTop':posicionVjugador2,'marginLeft':posicionHjugador2}}/>
    */}     <img src={balon} className="balon" style={{'marginTop':posicionVbalon,'marginLeft':posicionHbalon}}/>
