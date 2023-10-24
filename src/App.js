@@ -12,7 +12,7 @@ import { faFutbol,faTshirt,faClock,faPlayCircle } from '@fortawesome/fontawesome
 
 const deviceWidth = document.documentElement.clientWidth;       // Tamaño horizontal de pantalla
 const deviceHeight = document.documentElement.clientHeight;     // Tamaño vertical de pantalla
-const canchaLimitsH = [Math.round((-(deviceWidth/2)*95/100)/10)*10, Math.round(((deviceWidth/2)*95/100)/10)*10];   // Límite horizontal bordes cuadrilatero
+const canchaLimitsH = [Math.round((-(deviceWidth/2)*90/100)/10)*10, Math.round(((deviceWidth/2)*90/100)/10)*10];   // Límite horizontal bordes cuadrilatero
 const canchaLimitsV = [0, Math.floor((deviceHeight*90/100)/10)*10];  // Límite vertical bordes cuadrilatero
 console.log("Medidas cancha: ",deviceWidth,deviceHeight);
 console.log("Limites cancha H: ",canchaLimitsH);
@@ -20,15 +20,13 @@ console.log("Limites cancha V: ",canchaLimitsV);
 
 
 const balonH = 0;
-const balonV = 0;
-const jugador1H = -80;
-const jugador1V = 27;
-const jugador2H = 30;
-const jugador2V = 27;
-{/** const jugadorCPU1H = 150;
-const jugadorCPU1V = 160; */}
-const jugadorCPU1H = 30;
-const jugadorCPU1V = 27;
+const balonV = canchaLimitsV[1];
+const jugador1H = canchaLimitsH[0];
+const jugador1V = 0;
+const jugador2H = 0;
+const jugador2V = 0;
+const jugadorCPU1H = canchaLimitsH[1];
+const jugadorCPU1V = canchaLimitsV[1];
 const porteria1H = 50;
 const porteria1V = 162;
 const porteria2H = 655;
@@ -65,14 +63,12 @@ function App() {
   const Tiempo = () => { 
     useEffect(() => {
       const interval = setInterval(() => {
-        console.log(estado);
         if(estado === 'start'){
           setSeconds(seconds => seconds + 1);
         }
       }, 1000);
       return () => clearInterval(interval);
     }, []);
-  
     return (<p>{seconds}</p>);
   };
 
@@ -87,7 +83,6 @@ function App() {
       }, 1);
       return () => clearInterval(interval);
     }, []);
-  
     return (<p>{movimientosJugadorCPU1}</p>);
   };
 
@@ -189,19 +184,19 @@ function flechasTeclado(e,posicionHjugador1,setPosicionHjugador1,posicionVjugado
     }
   }   
   if (e.key === 'ArrowDown'){
-    if(posicionVjugador1 < 670){
+    if(posicionVjugador1 < 370){
       posicionVjugador1= posicionVjugador1 + 10;
       setPosicionVjugador1(posicionVjugador1);
     }
   }
   if (e.key === 'ArrowLeft'){
-    if(posicionHjugador1 > -630){
+    if(posicionHjugador1 > -330){
       posicionHjugador1 = posicionHjugador1 - 10;
       setPosicionHjugador1(posicionHjugador1);
     }
   }   
   if (e.key === 'ArrowRight'){
-    if(posicionHjugador1 < 520){
+    if(posicionHjugador1 < 320){
       posicionHjugador1 = posicionHjugador1 + 10;
       setPosicionHjugador1(posicionHjugador1);
     }
@@ -214,19 +209,19 @@ function flechasTeclado(e,posicionHjugador1,setPosicionHjugador1,posicionVjugado
     }
   }   
   if (e.key === 's'){
-    if(posicionVjugador2 < 670){
+    if(posicionVjugador2 < 370){
       posicionVjugador2 = posicionVjugador2 + 10;
       setPosicionVjugador2(posicionVjugador2);
     }
   }
   if (e.key === 'a'){
-    if(posicionHjugador2 > -630){
+    if(posicionHjugador2 > -330){
       posicionHjugador2 = posicionHjugador2 - 10;
       setPosicionHjugador2(posicionHjugador2);
     }
   }   
   if (e.key === 'd'){
-    if(posicionHjugador2 < 512){
+    if(posicionHjugador2 < 312){
       posicionHjugador2 = posicionHjugador2 + 10;
       setPosicionHjugador2(posicionHjugador2);
     }
@@ -258,7 +253,7 @@ function checkPosicionBalon(e,posicionHbalon,setPosicionHbalon,posicionVbalon,se
 }
 
 function checkGol(posicionHbalon,setPosicionHbalon,posicionVbalon,setPosicionVbalon,posicionHporteria1,posicionVporteria1,posicionHporteria2,posicionVporteria2,posicionHjugador1,setPosicionHjugador1,posicionVjugador1,setPosicionVjugador1,posicionHjugador2,setPosicionHjugador2,posicionVjugador2,setPosicionVjugador2,golesEquipo1,setGolesEquipo1,golesEquipo2,setGolesEquipo2) {
-  if((posicionHbalon + 656 === posicionHporteria1) &&
+  if((posicionHbalon + 356 === posicionHporteria1) &&
     (posicionVporteria1 - 20  < posicionVbalon && posicionVbalon < posicionVporteria1 + 80)
   ){
     golesEquipo2++;
@@ -276,7 +271,7 @@ function checkGol(posicionHbalon,setPosicionHbalon,posicionVbalon,setPosicionVba
     posicionVjugador2 = jugador2V;
     setPosicionVjugador2(posicionVjugador2);
   }
-  if((posicionHbalon + 711 === posicionHporteria2) &&
+  if((posicionHbalon + 411 === posicionHporteria2) &&
     (posicionVporteria2 - 20  < posicionVbalon && posicionVbalon < posicionVporteria2 + 80)
   ){
     golesEquipo1++;
