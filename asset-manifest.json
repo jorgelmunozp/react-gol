@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/react-gol/static/css/main.7f42c69d.css",
-    "main.js": "/react-gol/static/js/main.6e58868b.js",
+    "main.css": "/react-gol/static/css/main.03012038.css",
+    "main.js": "/react-gol/static/js/main.385b9f85.js",
     "static/js/787.ad6ec5f8.chunk.js": "/react-gol/static/js/787.ad6ec5f8.chunk.js",
     "static/media/cancha.jpg": "/react-gol/static/media/cancha.0313c8a2e44efcb5d4c1.jpg",
     "static/media/balon.png": "/react-gol/static/media/balon.96919a9053631357e18a.png",
@@ -10,12 +10,12 @@
     "static/media/logo.png": "/react-gol/static/media/logo.713961e30e9ec2c3ab9c.png",
     "static/media/LDFComicSans.ttf": "/react-gol/static/media/LDFComicSans.acf4b7e829f1fcdc78d4.ttf",
     "index.html": "/react-gol/index.html",
-    "main.7f42c69d.css.map": "/react-gol/static/css/main.7f42c69d.css.map",
-    "main.6e58868b.js.map": "/react-gol/static/js/main.6e58868b.js.map",
+    "main.03012038.css.map": "/react-gol/static/css/main.03012038.css.map",
+    "main.385b9f85.js.map": "/react-gol/static/js/main.385b9f85.js.map",
     "787.ad6ec5f8.chunk.js.map": "/react-gol/static/js/787.ad6ec5f8.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.7f42c69d.css",
-    "static/js/main.6e58868b.js"
+    "static/css/main.03012038.css",
+    "static/js/main.385b9f85.js"
   ]
 }
