@@ -1,8 +1,8 @@
-import logo from './logo.png';
-import balon from './balon.png';
-import jugador1 from './jugador1.png';
-import jugador2 from './jugador2.png';
-import jugadorCPU1 from './jugador2.png';
+import logo from './assets/images/logo.png';
+import balon from './assets/images/balon.png';
+import jugador1 from './assets/images/jugador1.png';
+import jugador2 from './assets/images/jugador2.png';
+import jugadorCPU1 from './assets/images/jugador2.png';
 import './App.css';
 
 import React, { useState, useEffect } from 'react';
@@ -10,20 +10,29 @@ import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFutbol,faTshirt,faClock,faPlayCircle } from '@fortawesome/fontawesome-free-solid'
 
-const balonH = -30;
-const balonV = 300;
-const jugador1H = -400;
-const jugador1V = 270;
-const jugador2H = 300;
-const jugador2V = 270;
+const deviceWidth = document.documentElement.clientWidth;       // Tamaño horizontal de pantalla
+const deviceHeight = document.documentElement.clientHeight;     // Tamaño vertical de pantalla
+const canchaLimitsH = [Math.round((-(deviceWidth/2)*95/100)/10)*10, Math.round(((deviceWidth/2)*95/100)/10)*10];   // Límite horizontal bordes cuadrilatero
+const canchaLimitsV = [0, Math.floor((deviceHeight*90/100)/10)*10];  // Límite vertical bordes cuadrilatero
+console.log("Medidas cancha: ",deviceWidth,deviceHeight);
+console.log("Limites cancha H: ",canchaLimitsH);
+console.log("Limites cancha V: ",canchaLimitsV);
+
+
+const balonH = 0;
+const balonV = 0;
+const jugador1H = -80;
+const jugador1V = 27;
+const jugador2H = 30;
+const jugador2V = 27;
 {/** const jugadorCPU1H = 150;
 const jugadorCPU1V = 160; */}
-const jugadorCPU1H = 300;
-const jugadorCPU1V = 270;
+const jugadorCPU1H = 30;
+const jugadorCPU1V = 27;
 const porteria1H = 50;
-const porteria1V = 262;
-const porteria2H = 1255;
-const porteria2V = 262;
+const porteria1V = 162;
+const porteria2H = 655;
+const porteria2V = 162;
 
 function App() {
   let [posicionHbalon, setPosicionHbalon] = useState(balonH);
@@ -91,7 +100,7 @@ function App() {
             <tr>
               <td><img src={logo} className="App-logo"/></td>
               <td>&nbsp;</td>
-              <td><h2 className="App-titulo">Gol</h2></td>
+              <td><h2 className="App-titulo">DoggyGol</h2></td>
               <td>&nbsp;</td>
               <td><h2><FontAwesomeIcon icon={faFutbol}/></h2></td>
             </tr>
@@ -123,7 +132,7 @@ function App() {
         </table> 
       </header>
       <body className="App-body">
-        <div className='cancha'>
+        <div className='cancha' id='cancha'>
           <hr className='porteria' style={{'marginTop':posicionVporteria1,'marginLeft':posicionHporteria1}}/>
           <hr className='porteria' style={{'marginTop':posicionVporteria2,'marginLeft':posicionHporteria2}}/>
           <img id='jugador1' src={jugador1} className="jugador" style={{'marginTop':posicionVjugador1,'marginLeft':posicionHjugador1}}/>
@@ -140,6 +149,14 @@ function botonStart(e,estado,setEstado){     //Función para iniciar el juego
   e.preventDefault();                            
   estado = 'start';
   setEstado(estado);
+
+  const limitWidth = Math.floor(document.getElementById('cancha').offsetWidth/10) * 10;   // Redondeo de unidades a la decena inferior mas cercana
+  const limitHeigth = Math.floor(document.getElementById('cancha').offsetHeight/10) * 10;
+  const canchaLimitsH = [Math.round((-(limitWidth/2)*95/100)/10)*10, Math.round(((limitWidth/2)*95/100)/10)*10];   // Límite horizontal bordes cuadrilatero
+  const canchaLimitsV = [0, Math.floor((limitHeigth*90/100)/10)*10];  // Límite vertical bordes cuadrilatero
+  console.log("Medidas cancha: ",limitWidth,limitHeigth);
+  console.log("Limites cancha H: ",canchaLimitsH);
+  console.log("Limites cancha V: ",canchaLimitsV);
 }
 
 function useTeclado(targetKey) {        // Hook que detecta el Teclado
@@ -320,7 +337,6 @@ function movimientosJugadorCPU1(estado,posicionHbalon,setPosicionHbalon,posicion
     setPosicionVjugadorCPU1(posicionVjugadorCPU1);
   }
 }
-
 
 
 export default App;
