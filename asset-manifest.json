@@ -1,20 +1,21 @@
 {
   "files": {
-    "main.css": "/react-gol/static/css/main.2d1f8a85.css",
-    "main.js": "/react-gol/static/js/main.e5411432.js",
+    "main.css": "/react-gol/static/css/main.7f42c69d.css",
+    "main.js": "/react-gol/static/js/main.6e58868b.js",
     "static/js/787.ad6ec5f8.chunk.js": "/react-gol/static/js/787.ad6ec5f8.chunk.js",
-    "static/media/cancha.jpg": "/react-gol/static/media/cancha.776053b8598c1dbeb49c.jpg",
+    "static/media/cancha.jpg": "/react-gol/static/media/cancha.0313c8a2e44efcb5d4c1.jpg",
     "static/media/balon.png": "/react-gol/static/media/balon.96919a9053631357e18a.png",
-    "static/media/jugador2.png": "/react-gol/static/media/jugador2.ee0d75326c9fd736a6b5.png",
+    "static/media/jugador2.png": "/react-gol/static/media/jugador2.21149b7c84e38307b4fa.png",
+    "static/media/jugador1.png": "/react-gol/static/media/jugador1.58f39ecbd61e297e5ae9.png",
     "static/media/logo.png": "/react-gol/static/media/logo.713961e30e9ec2c3ab9c.png",
-    "static/media/jugador1.png": "/react-gol/static/media/jugador1.66472b691b51aa92d670.png",
+    "static/media/LDFComicSans.ttf": "/react-gol/static/media/LDFComicSans.acf4b7e829f1fcdc78d4.ttf",
     "index.html": "/react-gol/index.html",
-    "main.2d1f8a85.css.map": "/react-gol/static/css/main.2d1f8a85.css.map",
-    "main.e5411432.js.map": "/react-gol/static/js/main.e5411432.js.map",
+    "main.7f42c69d.css.map": "/react-gol/static/css/main.7f42c69d.css.map",
+    "main.6e58868b.js.map": "/react-gol/static/js/main.6e58868b.js.map",
     "787.ad6ec5f8.chunk.js.map": "/react-gol/static/js/787.ad6ec5f8.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.2d1f8a85.css",
-    "static/js/main.e5411432.js"
+    "static/css/main.7f42c69d.css",
+    "static/js/main.6e58868b.js"
   ]
 }
