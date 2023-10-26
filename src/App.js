@@ -12,7 +12,7 @@ import { faFutbol,faTshirt,faClock,faPlayCircle } from '@fortawesome/fontawesome
 
 const deviceWidth = document.documentElement.clientWidth;       // Tamaño horizontal de pantalla
 const deviceHeight = document.documentElement.clientHeight;     // Tamaño vertical de pantalla
-const canchaLimitsH = [Math.round((-(deviceWidth/2)*90/100)/10)*10, Math.round(((deviceWidth/2)*90/100)/10)*10];   // Límite horizontal bordes cuadrilatero
+const canchaLimitsH = [Math.round((-(deviceWidth)*90/100)/10)*10, Math.round(((deviceWidth)*90/100)/10)*10];   // Límite horizontal bordes cuadrilatero
 const canchaLimitsV = [0, (Math.floor((deviceHeight*90/100)/10)*10)/2];  // Límite vertical bordes cuadrilatero
 console.log("Medidas cancha: ",deviceWidth,deviceHeight);
 console.log("Limites cancha H: ",canchaLimitsH);
@@ -26,7 +26,7 @@ const jugador1V = 0;
 const jugador2H = 0;
 const jugador2V = 0;
 const jugadorCPU1H = canchaLimitsH[1];
-const jugadorCPU1V = canchaLimitsV[1]/2;
+const jugadorCPU1V = 0;
 const porteria1H = 40;
 const porteria1V = canchaLimitsV[1]/2;
 const porteria2H = canchaLimitsH[1];
@@ -129,6 +129,21 @@ function App() {
         <div className='cancha' id='cancha'>
           <hr className='canchaMitad'/>
           <div className='canchaCirculoCentral'/>
+          <div className='canchaMediaLuna' id='canchaMediaLuna1'>
+            <div className='canchaMediaLunaCirculo' id='canchaMediaLunaCirculo1'/>
+            <div className='canchaMediaLunaOffset' id='canchaMediaLunaOffset1'/>
+          </div>
+          <div className='canchaAreaGrande' id='canchaAreaGrande1'/>
+          <div className='canchaAreaChica' id='canchaAreaChica1'/>
+          <div className='canchaPorteria' id='canchaPorteria1'/>
+          <div className='canchaMediaLuna' id='canchaMediaLuna2'>
+            <div className='canchaMediaLunaCirculo' id='canchaMediaLunaCirculo2'/>
+            <div className='canchaMediaLunaOffset' id='canchaMediaLunaOffset2'/>
+          </div>
+          <div className='canchaAreaGrande' id='canchaAreaGrande2'/>
+          <div className='canchaAreaChica' id='canchaAreaChica2'/>
+          <div className='canchaPorteria' id='canchaPorteria2'/>
+
           <hr className='porteria' style={{'marginTop':posicionVporteria1,'marginLeft':posicionHporteria1}}/>
           <hr className='porteria' style={{'marginTop':posicionVporteria2,'marginLeft':posicionHporteria2}}/>
           <img id='jugador1' src={jugador1} className="jugador" style={{'marginTop':posicionVjugador1,'marginLeft':posicionHjugador1}}/>

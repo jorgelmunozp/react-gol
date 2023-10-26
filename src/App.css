@@ -83,7 +83,7 @@
   display: flex;
   height: 95vmin;
   width: 90%;
-  border: 2px solid var(--white-color);
+  border: 4px solid var(--white-color);
   align-items: center;
   justify-content: center;
   vertical-align: middle;
@@ -91,21 +91,72 @@
   background-size:100%; */
 }
 .canchaMitad {
-  border-left: 2px solid var(--white-color);
+  border-left: 4px solid var(--white-color);
   height: 100%;
-  margin-top: 1vh;
+  margin-top: 1.5vmin;
   margin-left: 50%;
   margin-right: 50%;
 }
 .canchaCirculoCentral {
   position: absolute;
-  border: 2px solid red;
+  border: 4px solid var(--white-color);
   border-radius: 100vmax;
-  height: 40vmin;
-  width: 40vmin;
+  height: 30vmin;
+  width: 30vmin;
   margin-left: auto;
   margin-right: auto;
 }
+.canchaAreaGrande {
+  position: absolute;
+  border: 4px solid var(--white-color);
+  height: 55vmin;
+  width: 24vmin;
+}
+#canchaAreaGrande1 { left: 0; border-left: none; }
+#canchaAreaGrande2 { right: 0; border-right: none; }
+.canchaAreaChica {
+  position: absolute;
+  border: 4px solid var(--white-color);
+  height: 25vmin;
+  width: 9vmin;
+}
+#canchaAreaChica1 { left: 0; border-left: none; }
+#canchaAreaChica2 { right: 0; border-right: none; }
+.canchaMediaLuna {
+  position: absolute;
+  display: flex;
+  height: 25vmin;
+  width: 25vmin;
+}
+#canchaMediaLuna1 { left: 9vmin; }
+#canchaMediaLuna2 { right: 9vmin; }
+.canchaMediaLunaCirculo {
+  position: absolute;
+  border: 4px solid var(--white-color);
+  border-radius: 100%;
+  height: 25vmin;
+  width: 25vmin;
+}
+#canchaMediaLunaCirculo1 { left: -2vmin; }
+#canchaMediaLunaCirculo2 { right: -2vmin; }
+
+.canchaMediaLunaOffset {
+  position: absolute;
+  background-color: var(--green-color);
+  height: 30vmin;
+  width: 20vmin;
+}
+#canchaMediaLunaOffset1 { left: -20%; }
+#canchaMediaLunaOffset2 { left: 40%; }
+
+.canchaPorteria {
+  position: absolute;
+  border: 4px solid var(--white-color);
+  height: 15vmin;
+  width: 5vmin;
+}
+#canchaPorteria1 { left: -6vmin; border-right:none;}
+#canchaPorteria2 { right: -6vmin; border-left:none; }
 
 .balon {
   height: 7vmin;
