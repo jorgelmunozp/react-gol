@@ -18,11 +18,11 @@
 
 /****************************** HEADER ******************************/
 .App-header {
-  /* position: absolute; */
+  position: absolute;
   display: flex;
   flex-direction: column;
   height: 5vmin;
-  /* width: 100%; */
+  width: 50%;
   background-color: rgba(0, 0, 0, 0.3);
   font-size: 2vmin;
   color: var(--white-color);
@@ -54,6 +54,9 @@
   position: absolute;
   right: 2vw;
 }
+.botonStart {
+  /* width: 5vmin; */
+}
 
 /******************************* BODY *******************************/
 .App-body {
@@ -76,11 +79,32 @@
 }
 
 .cancha {
-  /* position: absolute; */
-  background: url("/public/cancha.jpg") no-repeat;
-  background-size:100%;
+  position: absolute;
+  display: flex;
+  height: 95vmin;
+  width: 90%;
+  border: 2px solid var(--white-color);
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  /* background: url("/public/cancha.jpg") no-repeat;
+  background-size:100%; */
+}
+.canchaMitad {
+  border-left: 2px solid var(--white-color);
   height: 100%;
-  width: 100%;
+  margin-top: 1vh;
+  margin-left: 50%;
+  margin-right: 50%;
+}
+.canchaCirculoCentral {
+  position: absolute;
+  border: 2px solid red;
+  border-radius: 100vmax;
+  height: 40vmin;
+  width: 40vmin;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .balon {
@@ -95,12 +119,10 @@
   position: absolute;
 }
 #jugador1 {
-  /* margin-left: -36vw;
-  margin-top: 42vh; */
+
 }
 #jugadorCPU1 {
-  /* margin-left: 29vw;
-  margin-top: 42vh; */
+
 }
 
 .porteria {

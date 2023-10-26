@@ -127,6 +127,8 @@ function App() {
       </header>
       <body className="App-body">
         <div className='cancha' id='cancha'>
+          <hr className='canchaMitad'/>
+          <div className='canchaCirculoCentral'/>
           <hr className='porteria' style={{'marginTop':posicionVporteria1,'marginLeft':posicionHporteria1}}/>
           <hr className='porteria' style={{'marginTop':posicionVporteria2,'marginLeft':posicionHporteria2}}/>
           <img id='jugador1' src={jugador1} className="jugador" style={{'marginTop':posicionVjugador1,'marginLeft':posicionHjugador1}}/>
