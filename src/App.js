@@ -93,9 +93,7 @@ function App() {
           <tbody>
             <tr>
               <td><img src={logo} className="App-logo"/></td>
-              <td>&nbsp;</td>
               <td><h2 className="App-titulo">DoggyGol</h2></td>
-              <td>&nbsp;</td>
               <td><h2><FontAwesomeIcon icon={faFutbol}/></h2></td>
             </tr>
           </tbody>
@@ -104,7 +102,6 @@ function App() {
           <tbody>
             <tr>
               <td><h2><FontAwesomeIcon icon={faClock}/></h2></td>
-              <td>&nbsp;</td>
               <td><h2>{<Tiempo/>}</h2></td>
             </tr>
           </tbody>
@@ -112,22 +109,28 @@ function App() {
         <table className='marcador'>
           <tbody>
             <tr>
-              <td><button type="button" onClick={(e) => botonStart(e,estado,setEstado,setPosicionHporteria1,setPosicionHporteria2)} onKeyDown={(e) => flechasTeclado(e,posicionHjugador1,setPosicionHjugador1,posicionVjugador1,setPosicionVjugador1,posicionHjugador2,setPosicionHjugador2,posicionVjugador2,setPosicionVjugador2,posicionHbalon,setPosicionHbalon,posicionVbalon,setPosicionVbalon,posicionHporteria1,posicionVporteria1,posicionHporteria2,posicionVporteria2,golesEquipo1,setGolesEquipo1,golesEquipo2,setGolesEquipo2)} className='botonStart' value="start"><FontAwesomeIcon icon={faPlayCircle}/></button></td>
-              <td><h2><FontAwesomeIcon icon={faTshirt} style={{'color':'#3f48cc'}}/>&nbsp;</h2></td>
+              <td><h2><FontAwesomeIcon icon={faTshirt} style={{'color':'#3f48cc'}}/></h2></td>
               <td><h2>{golesEquipo1}</h2></td>
-              <td>&nbsp;</td>
               <td><h2>-</h2></td>
-              <td>&nbsp;</td>
               <td><h2>{golesEquipo2}</h2></td>
-              <td>&nbsp;</td>
-              <td><h2><FontAwesomeIcon icon={faTshirt} style={{'color':'red'}}/>&nbsp;</h2></td>
+              <td><h2><FontAwesomeIcon icon={faTshirt} style={{'color':'red'}}/></h2></td>
             </tr>
           </tbody>
         </table> 
       </header>
       <body className="App-body">
         <div className='cancha' id='cancha'>
-          <hr className='canchaMitad'/>
+          <div className='fondoCanchaOscuro' id='fondoCancha1'/>
+          <div className='fondoCanchaClaro' id='fondoCancha2'/>
+          <div className='fondoCanchaOscuro' id='fondoCancha3'/>
+          <div className='fondoCanchaClaro' id='fondoCancha4'/>
+          <div className='fondoCanchaOscuro' id='fondoCancha5'/>
+          <div className='fondoCanchaClaro' id='fondoCancha6'/>
+          <div className='fondoCanchaOscuro' id='fondoCancha7'/>
+          <div className='fondoCanchaClaro' id='fondoCancha8'/>
+          <div className='fondoCanchaOscuro' id='fondoCancha9'/>
+          <div className='fondoCanchaClaro' id='fondoCancha10'/>
+          <hr className='canchaLineaMitad'/>
           <div className='canchaCirculoCentral'/>
           <div className='canchaTiroEsquina' id='canchaTiroEsquina1'/>
           <div className='canchaTiroEsquina' id='canchaTiroEsquina2'/>
@@ -148,6 +151,9 @@ function App() {
           <img src={jugadorCPU1} className="jugador" style={{'marginTop':posicionVjugadorCPU1,'marginLeft':posicionHjugadorCPU1}}/>
   {/*        <img src={jugador2} className="jugador" style={{'marginTop':posicionVjugador2,'marginLeft':posicionHjugador2}}/>
    */}     <img src={balon} className="balon" style={{'marginTop':posicionVbalon,'marginLeft':posicionHbalon}}/>
+        </div>
+        <div className='controles'>
+          <button type="button" onClick={(e) => botonStart(e,estado,setEstado,setPosicionHporteria1,setPosicionHporteria2)} onKeyDown={(e) => flechasTeclado(e,posicionHjugador1,setPosicionHjugador1,posicionVjugador1,setPosicionVjugador1,posicionHjugador2,setPosicionHjugador2,posicionVjugador2,setPosicionVjugador2,posicionHbalon,setPosicionHbalon,posicionVbalon,setPosicionVbalon,posicionHporteria1,posicionVporteria1,posicionHporteria2,posicionVporteria2,golesEquipo1,setGolesEquipo1,golesEquipo2,setGolesEquipo2)} className='botonStart' value="start"><FontAwesomeIcon icon={faPlayCircle}/></button>
         </div>
       </body>
     </div>
