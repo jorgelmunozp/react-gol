@@ -18,11 +18,11 @@
 
 /****************************** HEADER ******************************/
 .App-header {
-  position: absolute;
+  /* position: absolute; */
   display: flex;
   flex-direction: column;
   height: 5vmin;
-  width: 100%;  
+  /* width: 100%; */
   background-color: rgba(0, 0, 0, 0.3);
   font-size: 2vmin;
   color: var(--white-color);
@@ -40,7 +40,7 @@
 .App-slogan {
   position: absolute;
   pointer-events: none;
-  left: 3vw;
+  left: 2vw;
 }
 .App-logo {
   height: 3vmin;
@@ -52,21 +52,21 @@
 }
 .marcador {
   position: absolute;
-  right: 3vw;
+  right: 2vw;
 }
 
 /******************************* BODY *******************************/
 .App-body {
-  position: absolute;
+  /* position: absolute; */
   background-color: var(--green-color);
   height: 100vmin;
-  top:5vmin;
+  top:0vmin;
   /* left: 50vw; */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  font-size: 3vmin;
   color: white;
   user-select: none;                    /* Impide seleccionar la imagen con el mouse*/
   -moz-user-select: none;
@@ -80,7 +80,7 @@
   background: url("/public/cancha.jpg") no-repeat;
   background-size:100%;
   height: 100%;
-  width: 100vw;
+  width: 100%;
 }
 
 .balon {
@@ -104,7 +104,7 @@
 }
 
 .porteria {
-  position: absolute;
+  /* position: absolute; */
   border: none;
   border-left: 1px solid yellow;
   height: 15vh;

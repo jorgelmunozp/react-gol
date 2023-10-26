@@ -20,17 +20,17 @@ console.log("Limites cancha V: ",canchaLimitsV);
 
 
 const balonH = 0;
-const balonV = canchaLimitsV[1];
+const balonV = 0;
 const jugador1H = canchaLimitsH[0];
 const jugador1V = 0;
 const jugador2H = 0;
 const jugador2V = 0;
 const jugadorCPU1H = canchaLimitsH[1];
-const jugadorCPU1V = canchaLimitsV[1];
-const porteria1H = 50;
-const porteria1V = 162;
-const porteria2H = 655;
-const porteria2V = 162;
+const jugadorCPU1V = canchaLimitsV[1]/2;
+const porteria1H = 40;
+const porteria1V = canchaLimitsV[1]/2;
+const porteria2H = canchaLimitsH[1];
+const porteria2V = canchaLimitsV[1]/2;
 
 function App() {
   let [posicionHbalon, setPosicionHbalon] = useState(balonH);
@@ -41,9 +41,9 @@ function App() {
   let [posicionVjugador2, setPosicionVjugador2] = useState(jugador2V);
   let [posicionHjugadorCPU1, setPosicionHjugadorCPU1] = useState(jugadorCPU1H);
   let [posicionVjugadorCPU1, setPosicionVjugadorCPU1] = useState(jugadorCPU1V);
-  let [posicionHporteria1, setPosicionHporteria1] = useState(porteria1H);
+  let [posicionHporteria1, setPosicionHporteria1] = useState();
   let [posicionVporteria1, setPosicionVporteria1] = useState(porteria1V);
-  let [posicionHporteria2, setPosicionHporteria2] = useState(porteria2H);
+  let [posicionHporteria2, setPosicionHporteria2] = useState();
   let [posicionVporteria2, setPosicionVporteria2] = useState(porteria2V);
   let [golesEquipo1, setGolesEquipo1] = useState(0);
   let [golesEquipo2, setGolesEquipo2] = useState(0);
@@ -78,7 +78,6 @@ function App() {
         if(estado === 'start'){
           movimientosJugadorCPU1(estado,posicionHbalon,setPosicionHbalon,posicionVbalon,setPosicionVbalon,posicionHjugadorCPU1,setPosicionHjugadorCPU1,posicionVjugadorCPU1,setPosicionVjugadorCPU1,posicionHporteria1,posicionVporteria1);
           checkGol(posicionHbalon,setPosicionHbalon,posicionVbalon,setPosicionVbalon,posicionHporteria1,posicionVporteria1,posicionHporteria2,posicionVporteria2,posicionHjugador1,setPosicionHjugador1,posicionVjugador1,setPosicionVjugador1,posicionHjugador2,setPosicionHjugador2,posicionVjugador2,setPosicionVjugador2,golesEquipo1,setGolesEquipo1,golesEquipo2,setGolesEquipo2);
-
         }
       }, 1);
       return () => clearInterval(interval);
@@ -113,7 +112,7 @@ function App() {
         <table className='marcador'>
           <tbody>
             <tr>
-              <td><button type="button" onClick={(e) => botonStart(e,estado,setEstado)} onKeyDown={(e) => flechasTeclado(e,posicionHjugador1,setPosicionHjugador1,posicionVjugador1,setPosicionVjugador1,posicionHjugador2,setPosicionHjugador2,posicionVjugador2,setPosicionVjugador2,posicionHbalon,setPosicionHbalon,posicionVbalon,setPosicionVbalon,posicionHporteria1,posicionVporteria1,posicionHporteria2,posicionVporteria2,golesEquipo1,setGolesEquipo1,golesEquipo2,setGolesEquipo2)} className='botonStart' value="start"><FontAwesomeIcon icon={faPlayCircle}/></button></td>
+              <td><button type="button" onClick={(e) => botonStart(e,estado,setEstado,setPosicionHporteria1,setPosicionHporteria2)} onKeyDown={(e) => flechasTeclado(e,posicionHjugador1,setPosicionHjugador1,posicionVjugador1,setPosicionVjugador1,posicionHjugador2,setPosicionHjugador2,posicionVjugador2,setPosicionVjugador2,posicionHbalon,setPosicionHbalon,posicionVbalon,setPosicionVbalon,posicionHporteria1,posicionVporteria1,posicionHporteria2,posicionVporteria2,golesEquipo1,setGolesEquipo1,golesEquipo2,setGolesEquipo2)} className='botonStart' value="start"><FontAwesomeIcon icon={faPlayCircle}/></button></td>
               <td><h2><FontAwesomeIcon icon={faTshirt} style={{'color':'#3f48cc'}}/>&nbsp;</h2></td>
               <td><h2>{golesEquipo1}</h2></td>
               <td>&nbsp;</td>
@@ -140,7 +139,7 @@ function App() {
   );
 }
 
-function botonStart(e,estado,setEstado){     //Función para iniciar el juego
+function botonStart(e,estado,setEstado,setPosicionHporteria1,setPosicionHporteria2){     //Función para iniciar el juego
   e.preventDefault();                            
   estado = 'start';
   setEstado(estado);
@@ -152,6 +151,8 @@ function botonStart(e,estado,setEstado){     //Función para iniciar el juego
   console.log("Medidas cancha: ",limitWidth,limitHeigth);
   console.log("Limites cancha H: ",canchaLimitsH);
   console.log("Limites cancha V: ",canchaLimitsV);
+  setPosicionHporteria1(canchaLimitsH[0]);
+  setPosicionHporteria2(canchaLimitsH[1]);
 }
 
 function useTeclado(targetKey) {        // Hook que detecta el Teclado
@@ -202,30 +203,30 @@ function flechasTeclado(e,posicionHjugador1,setPosicionHjugador1,posicionVjugado
     }
   }
 
-  if (e.key === 'w'){                  //Jugador 2
-    if(posicionVjugador2 > canchaLimitsV[0]){
-      posicionVjugador2 = posicionVjugador2 - 10;
-      setPosicionVjugador2(posicionVjugador2);
-    }
-  }   
-  if (e.key === 's'){
-    if(posicionVjugador2 < canchaLimitsV[1]){
-      posicionVjugador2 = posicionVjugador2 + 10;
-      setPosicionVjugador2(posicionVjugador2);
-    }
-  }
-  if (e.key === 'a'){
-    if(posicionHjugador2 > canchaLimitsH[0]){
-      posicionHjugador2 = posicionHjugador2 - 10;
-      setPosicionHjugador2(posicionHjugador2);
-    }
-  }   
-  if (e.key === 'd'){
-    if(posicionHjugador2 < canchaLimitsH[1]){
-      posicionHjugador2 = posicionHjugador2 + 10;
-      setPosicionHjugador2(posicionHjugador2);
-    }
-  }
+  // if (e.key === 'w'){                  //Jugador 2
+  //   if(posicionVjugador2 > canchaLimitsV[0]){
+  //     posicionVjugador2 = posicionVjugador2 - 10;
+  //     setPosicionVjugador2(posicionVjugador2);
+  //   }
+  // }   
+  // if (e.key === 's'){
+  //   if(posicionVjugador2 < canchaLimitsV[1]){
+  //     posicionVjugador2 = posicionVjugador2 + 10;
+  //     setPosicionVjugador2(posicionVjugador2);
+  //   }
+  // }
+  // if (e.key === 'a'){
+  //   if(posicionHjugador2 > canchaLimitsH[0]){
+  //     posicionHjugador2 = posicionHjugador2 - 10;
+  //     setPosicionHjugador2(posicionHjugador2);
+  //   }
+  // }   
+  // if (e.key === 'd'){
+  //   if(posicionHjugador2 < canchaLimitsH[1]){
+  //     posicionHjugador2 = posicionHjugador2 + 10;
+  //     setPosicionHjugador2(posicionHjugador2);
+  //   }
+  // }
   checkPosicionBalon(e,posicionHbalon,setPosicionHbalon,posicionVbalon,setPosicionVbalon,posicionHjugador1,posicionVjugador1,posicionHjugador2,posicionVjugador2,posicionHjugadorCPU1,posicionVjugadorCPU1);
 }
 
@@ -253,7 +254,10 @@ function checkPosicionBalon(e,posicionHbalon,setPosicionHbalon,posicionVbalon,se
 }
 
 function checkGol(posicionHbalon,setPosicionHbalon,posicionVbalon,setPosicionVbalon,posicionHporteria1,posicionVporteria1,posicionHporteria2,posicionVporteria2,posicionHjugador1,setPosicionHjugador1,posicionVjugador1,setPosicionVjugador1,posicionHjugador2,setPosicionHjugador2,posicionVjugador2,setPosicionVjugador2,golesEquipo1,setGolesEquipo1,golesEquipo2,setGolesEquipo2) {
-  if((posicionHbalon + 356 === posicionHporteria1) &&
+  console.log("posicionHjugador1,posicionHjugador2: ",posicionHjugador1,posicionHjugador2)
+  console.log("posicionHporteria1,posicionVporteria1: ",posicionHporteria1,posicionVporteria1)
+  console.log("posicionHporteria1,posicionVporteria2: ",posicionHporteria1,posicionVporteria2)
+  if((posicionHbalon + 50 === posicionHporteria1) &&
     (posicionVporteria1 - 20  < posicionVbalon && posicionVbalon < posicionVporteria1 + 80)
   ){
     golesEquipo2++;
@@ -271,7 +275,7 @@ function checkGol(posicionHbalon,setPosicionHbalon,posicionVbalon,setPosicionVba
     posicionVjugador2 = jugador2V;
     setPosicionVjugador2(posicionVjugador2);
   }
-  if((posicionHbalon + 411 === posicionHporteria2) &&
+  if((posicionHbalon + 50 === posicionHporteria2) &&
     (posicionVporteria2 - 20  < posicionVbalon && posicionVbalon < posicionVporteria2 + 80)
   ){
     golesEquipo1++;
@@ -292,6 +296,8 @@ function checkGol(posicionHbalon,setPosicionHbalon,posicionVbalon,setPosicionVba
 }
 
 function movimientosJugadorCPU1(estado,posicionHbalon,setPosicionHbalon,posicionVbalon,setPosicionVbalon,posicionHjugadorCPU1,setPosicionHjugadorCPU1,posicionVjugadorCPU1,setPosicionVjugadorCPU1,posicionHporteria1,posicionVporteria1) {
+  console.log("posicionHjugadorCPU1,posicionVjugadorCPU1: ",posicionHjugadorCPU1,posicionVjugadorCPU1)
+
   if(estado === 'start'){
     if(posicionHbalon > posicionHjugadorCPU1 && posicionVbalon > posicionVjugadorCPU1){           //Hace que el Gusano persiga a Toto
       posicionHjugadorCPU1 = posicionHjugadorCPU1 + 1;
