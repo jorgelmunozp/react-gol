@@ -35,6 +35,7 @@
   -webkit-user-drag: none;
   -webkit-user-select: none;
   -ms-user-select: none;
+  z-index: 1;
 }
 .App-slogan {
   position: absolute;
@@ -56,8 +57,11 @@
 
 /******************************* BODY *******************************/
 .App-body {
+  position: absolute;
   background-color: var(--green-color);
-  height: 100vh;
+  height: 100vmin;
+  top:5vmin;
+  /* left: 50vw; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -72,11 +76,11 @@
 }
 
 .cancha {
-  position: absolute;
+  /* position: absolute; */
   background: url("/public/cancha.jpg") no-repeat;
   background-size:100%;
-  height: 100vmin;
-  width: 90vw;
+  height: 100%;
+  width: 100vw;
 }
 
 .balon {

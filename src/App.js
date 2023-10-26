@@ -13,7 +13,7 @@ import { faFutbol,faTshirt,faClock,faPlayCircle } from '@fortawesome/fontawesome
 const deviceWidth = document.documentElement.clientWidth;       // Tamaño horizontal de pantalla
 const deviceHeight = document.documentElement.clientHeight;     // Tamaño vertical de pantalla
 const canchaLimitsH = [Math.round((-(deviceWidth/2)*90/100)/10)*10, Math.round(((deviceWidth/2)*90/100)/10)*10];   // Límite horizontal bordes cuadrilatero
-const canchaLimitsV = [0, Math.floor((deviceHeight*90/100)/10)*10];  // Límite vertical bordes cuadrilatero
+const canchaLimitsV = [0, (Math.floor((deviceHeight*90/100)/10)*10)/2];  // Límite vertical bordes cuadrilatero
 console.log("Medidas cancha: ",deviceWidth,deviceHeight);
 console.log("Limites cancha H: ",canchaLimitsH);
 console.log("Limites cancha V: ",canchaLimitsV);
@@ -178,50 +178,50 @@ function useTeclado(targetKey) {        // Hook que detecta el Teclado
 }
 function flechasTeclado(e,posicionHjugador1,setPosicionHjugador1,posicionVjugador1,setPosicionVjugador1,posicionHjugador2,setPosicionHjugador2,posicionVjugador2,setPosicionVjugador2,posicionHbalon,setPosicionHbalon,posicionVbalon,setPosicionVbalon,posicionHporteria1,posicionVporteria1,posicionHporteria2,posicionVporteria2,golesEquipo1,setGolesEquipo1,golesEquipo2,setGolesEquipo2,posicionHjugadorCPU1,posicionVjugadorCPU1) {     //Función para sensar las flechas del teclado
   if (e.key === 'ArrowUp'){                  //Jugador 1
-    if(posicionVjugador1 > -50){
+    if(posicionVjugador1 > canchaLimitsV[0]){
       posicionVjugador1= posicionVjugador1 - 10;
       setPosicionVjugador1(posicionVjugador1);
     }
   }   
   if (e.key === 'ArrowDown'){
-    if(posicionVjugador1 < 370){
+    if(posicionVjugador1 < canchaLimitsV[1]){
       posicionVjugador1= posicionVjugador1 + 10;
       setPosicionVjugador1(posicionVjugador1);
     }
   }
   if (e.key === 'ArrowLeft'){
-    if(posicionHjugador1 > -330){
+    if(posicionHjugador1 > canchaLimitsH[0]){
       posicionHjugador1 = posicionHjugador1 - 10;
       setPosicionHjugador1(posicionHjugador1);
     }
   }   
   if (e.key === 'ArrowRight'){
-    if(posicionHjugador1 < 320){
+    if(posicionHjugador1 < canchaLimitsH[1]){
       posicionHjugador1 = posicionHjugador1 + 10;
       setPosicionHjugador1(posicionHjugador1);
     }
   }
 
   if (e.key === 'w'){                  //Jugador 2
-    if(posicionVjugador2 > -50){
+    if(posicionVjugador2 > canchaLimitsV[0]){
       posicionVjugador2 = posicionVjugador2 - 10;
       setPosicionVjugador2(posicionVjugador2);
     }
   }   
   if (e.key === 's'){
-    if(posicionVjugador2 < 370){
+    if(posicionVjugador2 < canchaLimitsV[1]){
       posicionVjugador2 = posicionVjugador2 + 10;
       setPosicionVjugador2(posicionVjugador2);
     }
   }
   if (e.key === 'a'){
-    if(posicionHjugador2 > -330){
+    if(posicionHjugador2 > canchaLimitsH[0]){
       posicionHjugador2 = posicionHjugador2 - 10;
       setPosicionHjugador2(posicionHjugador2);
     }
   }   
   if (e.key === 'd'){
-    if(posicionHjugador2 < 312){
+    if(posicionHjugador2 < canchaLimitsH[1]){
       posicionHjugador2 = posicionHjugador2 + 10;
       setPosicionHjugador2(posicionHjugador2);
     }
