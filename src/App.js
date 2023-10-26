@@ -9,6 +9,8 @@ import React, { useState, useEffect } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFutbol,faTshirt,faClock,faPlayCircle } from '@fortawesome/fontawesome-free-solid'
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 
 const deviceWidth = document.documentElement.clientWidth;       // Tamaño horizontal de pantalla
 const deviceHeight = document.documentElement.clientHeight;     // Tamaño vertical de pantalla
@@ -17,7 +19,6 @@ const canchaLimitsV = [0, (Math.floor((deviceHeight*90/100)/10)*10)/2];  // Lím
 console.log("Medidas cancha: ",deviceWidth,deviceHeight);
 console.log("Limites cancha H: ",canchaLimitsH);
 console.log("Limites cancha V: ",canchaLimitsV);
-
 
 const balonH = 0;
 const balonV = 0;
@@ -31,6 +32,15 @@ const porteria1H = 40;
 const porteria1V = canchaLimitsV[1]/2;
 const porteria2H = canchaLimitsH[1];
 const porteria2V = canchaLimitsV[1]/2;
+
+const alert = withReactContent(Swal);
+
+alert.fire({
+  title: <strong>Doggybol</strong>,
+  html: <i>You clicked the button!</i>,
+  icon: 'success'
+})
+
 
 function App() {
   let [posicionHbalon, setPosicionHbalon] = useState(balonH);
@@ -93,7 +103,6 @@ function App() {
           <tbody>
             <tr>
               <td><img src={logo} className="App-logo"/></td>
-              <td><h2 className="App-titulo">DoggyGol</h2></td>
               <td><h2><FontAwesomeIcon icon={faFutbol}/></h2></td>
             </tr>
           </tbody>
