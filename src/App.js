@@ -129,17 +129,15 @@ function App() {
         <div className='cancha' id='cancha'>
           <hr className='canchaMitad'/>
           <div className='canchaCirculoCentral'/>
-          <div className='canchaMediaLuna' id='canchaMediaLuna1'>
-            <div className='canchaMediaLunaCirculo' id='canchaMediaLunaCirculo1'/>
-            <div className='canchaMediaLunaOffset' id='canchaMediaLunaOffset1'/>
-          </div>
+          <div className='canchaTiroEsquina' id='canchaTiroEsquina1'/>
+          <div className='canchaTiroEsquina' id='canchaTiroEsquina2'/>
+          <div className='canchaTiroEsquina' id='canchaTiroEsquina3'/>
+          <div className='canchaTiroEsquina' id='canchaTiroEsquina4'/>
+          <div className='canchaMediaLuna' id='canchaMediaLuna1'/>
           <div className='canchaAreaGrande' id='canchaAreaGrande1'/>
           <div className='canchaAreaChica' id='canchaAreaChica1'/>
           <div className='canchaPorteria' id='canchaPorteria1'/>
-          <div className='canchaMediaLuna' id='canchaMediaLuna2'>
-            <div className='canchaMediaLunaCirculo' id='canchaMediaLunaCirculo2'/>
-            <div className='canchaMediaLunaOffset' id='canchaMediaLunaOffset2'/>
-          </div>
+          <div className='canchaMediaLuna' id='canchaMediaLuna2'/>
           <div className='canchaAreaGrande' id='canchaAreaGrande2'/>
           <div className='canchaAreaChica' id='canchaAreaChica2'/>
           <div className='canchaPorteria' id='canchaPorteria2'/>
