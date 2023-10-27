@@ -14,8 +14,8 @@ import withReactContent from 'sweetalert2-react-content';
 
 const deviceWidth = document.documentElement.clientWidth;       // Tamaño horizontal de pantalla
 const deviceHeight = document.documentElement.clientHeight;     // Tamaño vertical de pantalla
-const canchaLimitsH = [Math.round((-(deviceWidth)*90/100)/10)*10, Math.round(((deviceWidth)*90/100)/10)*10];   // Límite horizontal bordes cuadrilatero
-const canchaLimitsV = [0, (Math.floor((deviceHeight*90/100)/10)*10)/2];  // Límite vertical bordes cuadrilatero
+let canchaLimitsH = [Math.round((-(deviceWidth)*90/100)/10)*10, Math.round(((deviceWidth)*90/100)/10)*10];   // Límite horizontal bordes cuadrilatero
+let canchaLimitsV = [-Math.floor((deviceHeight*90/100)/10)*10, Math.floor((deviceHeight*90/100)/10)*10];  // Límite vertical bordes cuadrilatero
 console.log("Medidas cancha: ",deviceWidth,deviceHeight);
 console.log("Limites cancha H: ",canchaLimitsH);
 console.log("Limites cancha V: ",canchaLimitsV);
@@ -28,19 +28,17 @@ const jugador2H = 0;
 const jugador2V = 0;
 const jugadorCPU1H = canchaLimitsH[1];
 const jugadorCPU1V = 0;
-const porteria1H = 40;
-const porteria1V = canchaLimitsV[1]/2;
+const porteria1H = canchaLimitsH[0];
+const porteria1V = 0;
 const porteria2H = canchaLimitsH[1];
-const porteria2V = canchaLimitsV[1]/2;
+const porteria2V = 0;
 
 const alert = withReactContent(Swal);
-
-alert.fire({
-  title: <strong>Doggybol</strong>,
-  html: <i>You clicked the button!</i>,
-  icon: 'success'
-})
-
+// alert.fire({
+//   title: <strong>Doggybol</strong>,
+//   html: <i>You clicked the button!</i>,
+//   icon: 'success'
+// })
 
 function App() {
   let [posicionHbalon, setPosicionHbalon] = useState(balonH);
@@ -51,9 +49,9 @@ function App() {
   let [posicionVjugador2, setPosicionVjugador2] = useState(jugador2V);
   let [posicionHjugadorCPU1, setPosicionHjugadorCPU1] = useState(jugadorCPU1H);
   let [posicionVjugadorCPU1, setPosicionVjugadorCPU1] = useState(jugadorCPU1V);
-  let [posicionHporteria1, setPosicionHporteria1] = useState();
+  let [posicionHporteria1, setPosicionHporteria1] = useState(porteria1H);
   let [posicionVporteria1, setPosicionVporteria1] = useState(porteria1V);
-  let [posicionHporteria2, setPosicionHporteria2] = useState();
+  let [posicionHporteria2, setPosicionHporteria2] = useState(porteria2H);
   let [posicionVporteria2, setPosicionVporteria2] = useState(porteria2V);
   let [golesEquipo1, setGolesEquipo1] = useState(0);
   let [golesEquipo2, setGolesEquipo2] = useState(0);
@@ -99,30 +97,17 @@ function App() {
     <div className="App">
       <header className="App-header">
       {<TickJugadorCPU1/>}
-        <table className='App-slogan'>
-          <tbody>
-            <tr>
-              <td><img src={logo} className="App-logo"/></td>
-              <td><h2><FontAwesomeIcon icon={faFutbol}/></h2></td>
-            </tr>
-          </tbody>
-        </table> 
-        <table className='tiempo'>
-          <tbody>
-            <tr>
-              <td><h2><FontAwesomeIcon icon={faClock}/></h2></td>
-              <td><h2>{<Tiempo/>}</h2></td>
-            </tr>
-          </tbody>
-        </table> 
         <table className='marcador'>
           <tbody>
             <tr>
-              <td><h2><FontAwesomeIcon icon={faTshirt} style={{'color':'#3f48cc'}}/></h2></td>
+              <td><img src={logo} className="App-logo"/></td>
+              <td><h2><FontAwesomeIcon icon={faClock}/></h2></td>
+              <td><h2>{<Tiempo/>}</h2></td>
+              <td><h2><FontAwesomeIcon icon={faTshirt} className='icono' style={{'color':'#3f48cc'}}/></h2></td>
               <td><h2>{golesEquipo1}</h2></td>
-              <td><h2>-</h2></td>
+              <td><h2><FontAwesomeIcon icon={faFutbol}/></h2></td>
               <td><h2>{golesEquipo2}</h2></td>
-              <td><h2><FontAwesomeIcon icon={faTshirt} style={{'color':'red'}}/></h2></td>
+              <td><h2><FontAwesomeIcon icon={faTshirt} className='icono' style={{'color':'red'}}/></h2></td>
             </tr>
           </tbody>
         </table> 
@@ -176,8 +161,8 @@ function botonStart(e,estado,setEstado,setPosicionHporteria1,setPosicionHporteri
 
   const limitWidth = Math.floor(document.getElementById('cancha').offsetWidth/10) * 10;   // Redondeo de unidades a la decena inferior mas cercana
   const limitHeigth = Math.floor(document.getElementById('cancha').offsetHeight/10) * 10;
-  const canchaLimitsH = [Math.round((-(limitWidth/2)*95/100)/10)*10, Math.round(((limitWidth/2)*95/100)/10)*10];   // Límite horizontal bordes cuadrilatero
-  const canchaLimitsV = [0, Math.floor((limitHeigth*90/100)/10)*10];  // Límite vertical bordes cuadrilatero
+  canchaLimitsH = [Math.round((-(limitWidth)*95/100)/10)*10, Math.round(((limitWidth)*95/100)/10)*10];   // Límite horizontal bordes cuadrilatero
+  canchaLimitsV = [0, Math.floor((limitHeigth*90/100)/10)*10];  // Límite vertical bordes cuadrilatero
   console.log("Medidas cancha: ",limitWidth,limitHeigth);
   console.log("Limites cancha H: ",canchaLimitsH);
   console.log("Limites cancha V: ",canchaLimitsV);
@@ -187,24 +172,20 @@ function botonStart(e,estado,setEstado,setPosicionHporteria1,setPosicionHporteri
 
 function useTeclado(targetKey) {        // Hook que detecta el Teclado
   const [keyPressed, setKeyPressed] = useState(false);     // State for keeping track of whether key is pressed
-  function downHandler({ key }) {       // If pressed key is our target key then set to true
-    if (key === targetKey) {
-      setKeyPressed(true);
-    }
+  function downHandler({key}) {       // If pressed key is our target key then set to true
+    if (key === targetKey) { setKeyPressed(true); }
   }
-  const upHandler = ({ key }) => {    // If released key is our target key then set to false
-    if (key === targetKey) {
-      setKeyPressed(false);
-    }
+  const upHandler = ({key}) => {      // If released key is our target key then set to false
+    if (key === targetKey) { setKeyPressed(false); }
   };
-  useEffect(() => {                 // Add event listeners
+  useEffect(() => {                     // Add event listeners
     window.addEventListener("keydown", downHandler);
     window.addEventListener("keyup", upHandler);
-    return () => {                 // Remove event listeners on cleanup
+    return () => {                      // Remove event listeners on cleanup
       window.removeEventListener("keydown", downHandler);
       window.removeEventListener("keyup", upHandler);
     };
-  }, []);     // Empty array ensures that effect is only run on mount and unmount
+  }, []);             // Empty array ensures that effect is only run on mount and unmount
   return keyPressed;
 }
 function flechasTeclado(e,posicionHjugador1,setPosicionHjugador1,posicionVjugador1,setPosicionVjugador1,posicionHjugador2,setPosicionHjugador2,posicionVjugador2,setPosicionVjugador2,posicionHbalon,setPosicionHbalon,posicionVbalon,setPosicionVbalon,posicionHporteria1,posicionVporteria1,posicionHporteria2,posicionVporteria2,golesEquipo1,setGolesEquipo1,golesEquipo2,setGolesEquipo2,posicionHjugadorCPU1,posicionVjugadorCPU1) {     //Función para sensar las flechas del teclado
@@ -286,7 +267,7 @@ function checkPosicionBalon(e,posicionHbalon,setPosicionHbalon,posicionVbalon,se
 function checkGol(posicionHbalon,setPosicionHbalon,posicionVbalon,setPosicionVbalon,posicionHporteria1,posicionVporteria1,posicionHporteria2,posicionVporteria2,posicionHjugador1,setPosicionHjugador1,posicionVjugador1,setPosicionVjugador1,posicionHjugador2,setPosicionHjugador2,posicionVjugador2,setPosicionVjugador2,golesEquipo1,setGolesEquipo1,golesEquipo2,setGolesEquipo2) {
   console.log("posicionHjugador1,posicionHjugador2: ",posicionHjugador1,posicionHjugador2)
   console.log("posicionHporteria1,posicionVporteria1: ",posicionHporteria1,posicionVporteria1)
-  console.log("posicionHporteria1,posicionVporteria2: ",posicionHporteria1,posicionVporteria2)
+  console.log("posicionHporteria2,posicionVporteria2: ",posicionHporteria2,posicionVporteria2)
   if((posicionHbalon + 50 === posicionHporteria1) &&
     (posicionVporteria1 - 20  < posicionVbalon && posicionVbalon < posicionVporteria1 + 80)
   ){
@@ -305,7 +286,7 @@ function checkGol(posicionHbalon,setPosicionHbalon,posicionVbalon,setPosicionVba
     posicionVjugador2 = jugador2V;
     setPosicionVjugador2(posicionVjugador2);
   }
-  if((posicionHbalon + 50 === posicionHporteria2) &&
+  if((posicionHbalon - 50 === posicionHporteria2) &&
     (posicionVporteria2 - 20  < posicionVbalon && posicionVbalon < posicionVporteria2 + 80)
   ){
     golesEquipo1++;
