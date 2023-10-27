@@ -134,11 +134,11 @@ function App() {
           <img src={balon} className="balon" style={{'marginTop':posicionVbalon,'marginLeft':posicionHbalon}}/>
         </div>
         <div className='controles'>
-          <button type="button" className='boton' onClick={(e) => botonLeft(e,posicionHjugador1,setPosicionHjugador1,canchaLimitsH)}><FontAwesomeIcon icon={faCaretLeft}/></button>
-          <button type="button" className='boton' onClick={(e) => botonUp(e,posicionVjugador1,setPosicionVjugador1,canchaLimitsV)}><FontAwesomeIcon icon={faCaretUp}/></button>
-          <button type="button" className='boton' onClick={(e) => botonStart(e,estado,setEstado,setPosicionHporteria1,setPosicionHporteria2)} onKeyDown={(e) => flechasTeclado(e,posicionHjugador1,setPosicionHjugador1,posicionVjugador1,setPosicionVjugador1,posicionHbalon,setPosicionHbalon,posicionVbalon,setPosicionVbalon,posicionHporteria1,posicionVporteria1,posicionHporteria2,posicionVporteria2,golesEquipo1,setGolesEquipo1,golesEquipo2,setGolesEquipo2)} value="start"><FontAwesomeIcon icon={faPlayCircle}/></button>
-          <button type="button" className='boton' onClick={(e) => botonDown(e,posicionVjugador1,setPosicionVjugador1,canchaLimitsV)}><FontAwesomeIcon icon={faCaretDown}/></button>
-          <button type="button" className='boton' onClick={(e) => botonRight(e,posicionHjugador1,setPosicionHjugador1,canchaLimitsH)}><FontAwesomeIcon icon={faCaretRight}/></button>
+          <button type="button" className='boton' onClick={(e) => botones(e,'left',posicionHjugador1,setPosicionHjugador1,posicionVjugador1,setPosicionVjugador1,canchaLimitsH,canchaLimitsV,posicionHbalon,setPosicionHbalon,posicionVbalon,setPosicionVbalon,posicionHjugadorCPU1,posicionVjugadorCPU1)}><FontAwesomeIcon icon={faCaretLeft}/></button>
+          <button type="button" className='boton' onClick={(e) => botones(e,'up',posicionHjugador1,setPosicionHjugador1,posicionVjugador1,setPosicionVjugador1,canchaLimitsH,canchaLimitsV,posicionHbalon,setPosicionHbalon,posicionVbalon,setPosicionVbalon,posicionHjugadorCPU1,posicionVjugadorCPU1)}><FontAwesomeIcon icon={faCaretUp}/></button>
+          <button type="button" className='boton' onClick={(e) => botonStart(e,estado,setEstado,setPosicionHporteria1,setPosicionHporteria2)} onKeyDown={(e) => flechasTeclado(e,posicionHjugador1,setPosicionHjugador1,posicionVjugador1,setPosicionVjugador1,posicionHbalon,setPosicionHbalon,posicionVbalon,setPosicionVbalon,posicionHjugadorCPU1,posicionVjugadorCPU1)} value="start"><FontAwesomeIcon icon={faPlayCircle}/></button>
+          <button type="button" className='boton' onClick={(e) => botones(e,'down',posicionHjugador1,setPosicionHjugador1,posicionVjugador1,setPosicionVjugador1,canchaLimitsH,canchaLimitsV,posicionHbalon,setPosicionHbalon,posicionVbalon,setPosicionVbalon,posicionHjugadorCPU1,posicionVjugadorCPU1)}><FontAwesomeIcon icon={faCaretDown}/></button>
+          <button type="button" className='boton' onClick={(e) => botones(e,'right',posicionHjugador1,setPosicionHjugador1,posicionVjugador1,setPosicionVjugador1,canchaLimitsH,canchaLimitsV,posicionHbalon,setPosicionHbalon,posicionVbalon,setPosicionVbalon,posicionHjugadorCPU1,posicionVjugadorCPU1)}><FontAwesomeIcon icon={faCaretRight}/></button>
         </div>
       </body>
     </div>
@@ -161,56 +161,52 @@ function botonStart(e,estado,setEstado,setPosicionHporteria1,setPosicionHporteri
 }
 
 // Botones del control por interfaz gráfica
-function botonRight(e,posicionHjugador1,setPosicionHjugador1,canchaLimitsH) {     // Límite derecha movimiento Doggy dentro del cuadrilátero
+function botones(e,direction,posicionHjugador1,setPosicionHjugador1,posicionVjugador1,setPosicionVjugador1,canchaLimitsH,canchaLimitsV,posicionHbalon,setPosicionHbalon,posicionVbalon,setPosicionVbalon,posicionHjugadorCPU1,posicionVjugadorCPU1) {     // Botones interfaz gráfica movimiento Doggy dentro de la cancha
   e.preventDefault();
-  if(posicionHjugador1 < canchaLimitsH[1]){
-    posicionHjugador1 = posicionHjugador1 + 10;
-    setPosicionHjugador1(posicionHjugador1);
+  if (direction === 'up') {
+    if(posicionVjugador1 > canchaLimitsV[0]){
+      posicionVjugador1= posicionVjugador1 - 10;
+      setPosicionVjugador1(posicionVjugador1);
+    }
   }
-}
-function botonLeft(e,posicionHjugador1,setPosicionHjugador1,canchaLimitsH) {     // Límite derecha movimiento Doggy dentro del cuadrilátero
-  e.preventDefault();
-  if(posicionHjugador1 > canchaLimitsH[0]){
-    posicionHjugador1 = posicionHjugador1 - 10;
-    setPosicionHjugador1(posicionHjugador1);
+  if (direction === 'down') {
+    if(posicionVjugador1 < canchaLimitsV[1]){
+      posicionVjugador1= posicionVjugador1 + 10;
+      setPosicionVjugador1(posicionVjugador1);
+    }
   }
-}
-function botonUp(e,posicionVjugador1,setPosicionVjugador1,canchaLimitsV) {     // Límite derecha movimiento Doggy dentro del cuadrilátero
-  e.preventDefault();
-  if(posicionVjugador1 > canchaLimitsV[0]){
-    posicionVjugador1= posicionVjugador1 - 10;
-    setPosicionVjugador1(posicionVjugador1);
+  if(direction === 'right') {
+    if(posicionHjugador1 < canchaLimitsH[1]){
+      posicionHjugador1 = posicionHjugador1 + 10;
+      setPosicionHjugador1(posicionHjugador1);
+    }
   }
-}
-function botonDown(e,posicionVjugador1,setPosicionVjugador1,canchaLimitsV) {     // Límite derecha movimiento Doggy dentro del cuadrilátero
-  e.preventDefault();
-  if(posicionVjugador1 < canchaLimitsV[1]){
-    posicionVjugador1= posicionVjugador1 + 10;
-    setPosicionVjugador1(posicionVjugador1);
+  if (direction === 'left') {
+    if(posicionHjugador1 > canchaLimitsH[0]){
+      posicionHjugador1 = posicionHjugador1 - 10;
+      setPosicionHjugador1(posicionHjugador1);
+    }
   }
+  checkPosicionBalon(e,posicionHbalon,setPosicionHbalon,posicionVbalon,setPosicionVbalon,posicionHjugador1,posicionVjugador1,posicionHjugadorCPU1,posicionVjugadorCPU1);
 }
 
 // Manejo del Teclado
-function useTeclado(targetKey) {        // Hook que detecta el Teclado
-  const [keyPressed, setKeyPressed] = useState(false);     // State for keeping track of whether key is pressed
-  function downHandler({key}) {         // If pressed key is our target key then set to true
-    if (key === targetKey) { setKeyPressed(true); }
-  }
-  const upHandler = ({key}) => {        // If released key is our target key then set to false
-    if (key === targetKey) { setKeyPressed(false); }
-  };
-  useEffect(() => {                     // Add event listeners
+function useTeclado(targetKey) {                            // Hook que detecta el Teclado
+  const [keyPressed, setKeyPressed] = useState(false);      // State for keeping track of whether key is pressed
+  const downHandler = ({key}) => { if(key === targetKey){ setKeyPressed(true); }}   // If pressed key is our target key then set to true
+  const upHandler = ({key}) => { if(key === targetKey){ setKeyPressed(false); }}; // If released key is our target key then set to false
+  useEffect(() => {                                         // Add event listeners
     window.addEventListener("keydown", downHandler);
     window.addEventListener("keyup", upHandler);
-    return () => {                      // Remove event listeners on cleanup
+    return () => {                                          // Remove event listeners on cleanup
       window.removeEventListener("keydown", downHandler);
       window.removeEventListener("keyup", upHandler);
     };
-  }, []);               // Empty array ensures that effect is only run on mount and unmount
+  }, []);                                                   // Empty array ensures that effect is only run on mount and unmount
   return keyPressed;
 }
-function flechasTeclado(e,posicionHjugador1,setPosicionHjugador1,posicionVjugador1,setPosicionVjugador1,posicionHbalon,setPosicionHbalon,posicionVbalon,setPosicionVbalon,posicionHporteria1,posicionVporteria1,posicionHporteria2,posicionVporteria2,golesEquipo1,setGolesEquipo1,golesEquipo2,setGolesEquipo2,posicionHjugadorCPU1,posicionVjugadorCPU1) {     //Función para sensar las flechas del teclado
-  if (e.key === 'ArrowUp'){                  //Jugador 1
+function flechasTeclado(e,posicionHjugador1,setPosicionHjugador1,posicionVjugador1,setPosicionVjugador1,posicionHbalon,setPosicionHbalon,posicionVbalon,setPosicionVbalon,posicionHjugadorCPU1,posicionVjugadorCPU1) {     //Función para sensar las flechas del teclado
+  if (e.key === 'ArrowUp'){                                 //Jugador 1
     if(posicionVjugador1 > canchaLimitsV[0]){
       posicionVjugador1= posicionVjugador1 - 10;
       setPosicionVjugador1(posicionVjugador1);
@@ -247,7 +243,7 @@ function checkPosicionBalon(e,posicionHbalon,setPosicionHbalon,posicionVbalon,se
   if((posicionHbalon - 40  < posicionHjugadorCPU1 && posicionHjugadorCPU1 < posicionHbalon + 40) &&
      (posicionVbalon - 70  < posicionVjugadorCPU1 && posicionVjugadorCPU1 < posicionVbalon + 20)
   ){
-    posicionHbalon = posicionHjugadorCPU1-24;
+    posicionHbalon = posicionHjugadorCPU1;
     posicionVbalon = posicionVjugadorCPU1;
   }
   setPosicionHbalon(posicionHbalon)
@@ -256,7 +252,7 @@ function checkPosicionBalon(e,posicionHbalon,setPosicionHbalon,posicionVbalon,se
 
 function checkGol(posicionHbalon,setPosicionHbalon,posicionVbalon,setPosicionVbalon,posicionHporteria1,posicionVporteria1,posicionHporteria2,posicionVporteria2,posicionHjugador1,setPosicionHjugador1,posicionVjugador1,setPosicionVjugador1,golesEquipo1,setGolesEquipo1,golesEquipo2,setGolesEquipo2) {
   if((posicionHbalon + 50 === posicionHporteria1) &&
-    (posicionVporteria1 - 20  < posicionVbalon && posicionVbalon < posicionVporteria1 + 80)
+    (posicionVporteria1 - 50  < posicionVbalon && posicionVbalon < posicionVporteria1 + 80)
   ){
     golesEquipo2++;
     setGolesEquipo2(golesEquipo2);
@@ -270,7 +266,7 @@ function checkGol(posicionHbalon,setPosicionHbalon,posicionVbalon,setPosicionVba
     // setPosicionVjugador1(posicionVjugador1);
   }
   if((posicionHbalon - 24 === posicionHporteria2) &&
-    (posicionVporteria2 - 20  < posicionVbalon && posicionVbalon < posicionVporteria2 + 80)
+    (posicionVporteria2 - 50  < posicionVbalon && posicionVbalon < posicionVporteria2 + 80)
   ){
     golesEquipo1++;
     setGolesEquipo1(golesEquipo1);
