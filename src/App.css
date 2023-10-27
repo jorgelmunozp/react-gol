@@ -213,12 +213,29 @@
 /********************* Controles *********************/
 .controles {
   position: absolute;
-  background-color: rgba(0, 0, 0, 0.2);
+  display: flex;
+  top: 0;
   bottom: 10vmin;
+  width: 90%;
+  background-color: rgba(0, 0, 0, 0.2);
   z-index: 1;
+  align-items: center;
+  justify-content: center;
+}
+.controlIzquierda {
+  position: absolute;
+  left: 0;
+}
+.controlDerecha {
+  position: absolute;
+  right: 0;
 }
 .boton {
   background-color: transparent;
   padding: 2.5vmin 5vmin 2.5vmin 5vmin;
   font-size: 4vmin;
+}
+.botonStart {
+  position: absolute;
+  bottom: 0;
 }
