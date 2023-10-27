@@ -214,28 +214,43 @@
 .controles {
   position: absolute;
   display: flex;
-  top: 0;
+  top: 5vmin;
   bottom: 10vmin;
   width: 90%;
-  background-color: rgba(0, 0, 0, 0.2);
-  z-index: 1;
+  height: 90%;
+  font-size: 5vmin;
+  color: rgba(0, 0, 0, 0.4);
   align-items: center;
   justify-content: center;
+  z-index: 1;
 }
 .controlIzquierda {
   position: absolute;
   left: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-top-left-radius: 20vmin;
+  border-bottom-left-radius: 20vmin;
 }
 .controlDerecha {
   position: absolute;
   right: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-top-right-radius: 20vmin;
+  border-bottom-right-radius: 20vmin;
 }
 .boton {
   background-color: transparent;
-  padding: 2.5vmin 5vmin 2.5vmin 5vmin;
-  font-size: 4vmin;
+  color: inherit;
+  font-size: inherit;
+  border: none;
+  padding: 11vmin 10vmin 11vmin 10vmin;
 }
 .botonStart {
   position: absolute;
   bottom: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+  color: inherit;
+  font-size: inherit;
+  border: none;
+  padding: 4vmin 10vmin 4vmin 10vmin;
 }
