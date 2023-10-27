@@ -51,9 +51,6 @@
 .icono {
   filter: var(--drop-shadow-white);
 }
-.botonStart {
-  /* width: 5vmin; */
-}
 
 /******************************* BODY *******************************/
 .App-body {
@@ -216,5 +213,12 @@
 /********************* Controles *********************/
 .controles {
   position: absolute;
-  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+  bottom: 10vmin;
+  z-index: 1;
+}
+.boton {
+  background-color: transparent;
+  padding: 2.5vmin 5vmin 2.5vmin 5vmin;
+  font-size: 4vmin;
 }

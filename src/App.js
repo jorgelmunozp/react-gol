@@ -1,14 +1,13 @@
 import logo from './assets/images/logo.png';
 import balon from './assets/images/balon.png';
 import jugador1 from './assets/images/jugador1.png';
-import jugador2 from './assets/images/jugador2.png';
 import jugadorCPU1 from './assets/images/jugador2.png';
 import './App.css';
 
 import React, { useState, useEffect } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFutbol,faTshirt,faClock,faPlayCircle } from '@fortawesome/fontawesome-free-solid'
+import { faFutbol,faTshirt,faClock,faPlayCircle,faCaretUp, faCaretDown, faCaretLeft, faCaretRight } from '@fortawesome/fontawesome-free-solid'
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 
@@ -24,8 +23,6 @@ const balonH = 0;
 const balonV = 0;
 const jugador1H = canchaLimitsH[0];
 const jugador1V = 0;
-const jugador2H = 0;
-const jugador2V = 0;
 const jugadorCPU1H = canchaLimitsH[1];
 const jugadorCPU1V = 0;
 const porteria1H = canchaLimitsH[0];
@@ -45,8 +42,6 @@ function App() {
   let [posicionVbalon, setPosicionVbalon] = useState(balonV);
   let [posicionHjugador1, setPosicionHjugador1] = useState(jugador1H);
   let [posicionVjugador1, setPosicionVjugador1] = useState(jugador1V);
-  let [posicionHjugador2, setPosicionHjugador2] = useState(jugador2H);
-  let [posicionVjugador2, setPosicionVjugador2] = useState(jugador2V);
   let [posicionHjugadorCPU1, setPosicionHjugadorCPU1] = useState(jugadorCPU1H);
   let [posicionVjugadorCPU1, setPosicionVjugadorCPU1] = useState(jugadorCPU1V);
   let [posicionHporteria1, setPosicionHporteria1] = useState(porteria1H);
@@ -57,23 +52,17 @@ function App() {
   let [golesEquipo2, setGolesEquipo2] = useState(0);
   let [estado, setEstado] = useState('');
   
-  const teclaUp1 = useTeclado("w");                   //Flechas del teclado
-  const teclaDown1 = useTeclado("s");                 // Jugador 1
-  const teclaLeft1 = useTeclado("a");
-  const teclaRight1 = useTeclado("e");
-  const teclaUp2 = useTeclado("ArrowUp");            // Jugador 2
+  const teclaUp2 = useTeclado("ArrowUp");               //Flechas del teclado Jugador 1
   const teclaDown2 = useTeclado("ArrowDown");
   const teclaLeft2 = useTeclado("ArrowLeft");
   const teclaRight2 = useTeclado("ArrowRight");
 
-  const [seconds, setSeconds] = useState(0);
+  const [seconds, setSeconds] = useState(0);            // Tiempo de juego
 
   const Tiempo = () => { 
     useEffect(() => {
       const interval = setInterval(() => {
-        if(estado === 'start'){
-          setSeconds(seconds => seconds + 1);
-        }
+        if(estado === 'start'){ setSeconds(seconds => seconds + 1); }
       }, 1000);
       return () => clearInterval(interval);
     }, []);
@@ -85,7 +74,7 @@ function App() {
       const interval = setInterval(() => {
         if(estado === 'start'){
           movimientosJugadorCPU1(estado,posicionHbalon,setPosicionHbalon,posicionVbalon,setPosicionVbalon,posicionHjugadorCPU1,setPosicionHjugadorCPU1,posicionVjugadorCPU1,setPosicionVjugadorCPU1,posicionHporteria1,posicionVporteria1);
-          checkGol(posicionHbalon,setPosicionHbalon,posicionVbalon,setPosicionVbalon,posicionHporteria1,posicionVporteria1,posicionHporteria2,posicionVporteria2,posicionHjugador1,setPosicionHjugador1,posicionVjugador1,setPosicionVjugador1,posicionHjugador2,setPosicionHjugador2,posicionVjugador2,setPosicionVjugador2,golesEquipo1,setGolesEquipo1,golesEquipo2,setGolesEquipo2);
+          checkGol(posicionHbalon,setPosicionHbalon,posicionVbalon,setPosicionVbalon,posicionHporteria1,posicionVporteria1,posicionHporteria2,posicionVporteria2,posicionHjugador1,setPosicionHjugador1,posicionVjugador1,setPosicionVjugador1,golesEquipo1,setGolesEquipo1,golesEquipo2,setGolesEquipo2);
         }
       }, 1);
       return () => clearInterval(interval);
@@ -113,7 +102,7 @@ function App() {
         </table> 
       </header>
       <body className="App-body">
-        <div className='cancha' id='cancha'>
+        <div className='cancha' id='cancha' autoFocus={true}>
           <div className='fondoCanchaOscuro' id='fondoCancha1'/>
           <div className='fondoCanchaClaro' id='fondoCancha2'/>
           <div className='fondoCanchaOscuro' id='fondoCancha3'/>
@@ -138,16 +127,18 @@ function App() {
           <div className='canchaAreaGrande' id='canchaAreaGrande2'/>
           <div className='canchaAreaChica' id='canchaAreaChica2'/>
           <div className='canchaPorteria' id='canchaPorteria2'/>
-
           <hr className='porteria' style={{'marginTop':posicionVporteria1,'marginLeft':posicionHporteria1}}/>
           <hr className='porteria' style={{'marginTop':posicionVporteria2,'marginLeft':posicionHporteria2}}/>
           <img id='jugador1' src={jugador1} className="jugador" style={{'marginTop':posicionVjugador1,'marginLeft':posicionHjugador1}}/>
           <img src={jugadorCPU1} className="jugador" style={{'marginTop':posicionVjugadorCPU1,'marginLeft':posicionHjugadorCPU1}}/>
-  {/*        <img src={jugador2} className="jugador" style={{'marginTop':posicionVjugador2,'marginLeft':posicionHjugador2}}/>
-   */}     <img src={balon} className="balon" style={{'marginTop':posicionVbalon,'marginLeft':posicionHbalon}}/>
+          <img src={balon} className="balon" style={{'marginTop':posicionVbalon,'marginLeft':posicionHbalon}}/>
         </div>
         <div className='controles'>
-          <button type="button" onClick={(e) => botonStart(e,estado,setEstado,setPosicionHporteria1,setPosicionHporteria2)} onKeyDown={(e) => flechasTeclado(e,posicionHjugador1,setPosicionHjugador1,posicionVjugador1,setPosicionVjugador1,posicionHjugador2,setPosicionHjugador2,posicionVjugador2,setPosicionVjugador2,posicionHbalon,setPosicionHbalon,posicionVbalon,setPosicionVbalon,posicionHporteria1,posicionVporteria1,posicionHporteria2,posicionVporteria2,golesEquipo1,setGolesEquipo1,golesEquipo2,setGolesEquipo2)} className='botonStart' value="start"><FontAwesomeIcon icon={faPlayCircle}/></button>
+          <button type="button" className='boton' onClick={(e) => botonLeft(e,posicionHjugador1,setPosicionHjugador1,canchaLimitsH)}><FontAwesomeIcon icon={faCaretLeft}/></button>
+          <button type="button" className='boton' onClick={(e) => botonUp(e,posicionVjugador1,setPosicionVjugador1,canchaLimitsV)}><FontAwesomeIcon icon={faCaretUp}/></button>
+          <button type="button" className='boton' onClick={(e) => botonStart(e,estado,setEstado,setPosicionHporteria1,setPosicionHporteria2)} onKeyDown={(e) => flechasTeclado(e,posicionHjugador1,setPosicionHjugador1,posicionVjugador1,setPosicionVjugador1,posicionHbalon,setPosicionHbalon,posicionVbalon,setPosicionVbalon,posicionHporteria1,posicionVporteria1,posicionHporteria2,posicionVporteria2,golesEquipo1,setGolesEquipo1,golesEquipo2,setGolesEquipo2)} value="start"><FontAwesomeIcon icon={faPlayCircle}/></button>
+          <button type="button" className='boton' onClick={(e) => botonDown(e,posicionVjugador1,setPosicionVjugador1,canchaLimitsV)}><FontAwesomeIcon icon={faCaretDown}/></button>
+          <button type="button" className='boton' onClick={(e) => botonRight(e,posicionHjugador1,setPosicionHjugador1,canchaLimitsH)}><FontAwesomeIcon icon={faCaretRight}/></button>
         </div>
       </body>
     </div>
@@ -158,11 +149,10 @@ function botonStart(e,estado,setEstado,setPosicionHporteria1,setPosicionHporteri
   e.preventDefault();                            
   estado = 'start';
   setEstado(estado);
-
   const limitWidth = Math.floor(document.getElementById('cancha').offsetWidth/10) * 10;   // Redondeo de unidades a la decena inferior mas cercana
   const limitHeigth = Math.floor(document.getElementById('cancha').offsetHeight/10) * 10;
-  canchaLimitsH = [Math.round((-(limitWidth)*95/100)/10)*10, Math.round(((limitWidth)*95/100)/10)*10];   // Límite horizontal bordes cuadrilatero
-  canchaLimitsV = [0, Math.floor((limitHeigth*90/100)/10)*10];  // Límite vertical bordes cuadrilatero
+  canchaLimitsH = [-Math.round(((limitWidth)*95/100)/10)*10, Math.round(((limitWidth)*95/100)/10)*10];   // Límite horizontal bordes cuadrilatero
+  canchaLimitsV = [-Math.floor((limitHeigth*90/100)/10)*10, Math.floor((limitHeigth*90/100)/10)*10];  // Límite vertical bordes cuadrilatero
   console.log("Medidas cancha: ",limitWidth,limitHeigth);
   console.log("Limites cancha H: ",canchaLimitsH);
   console.log("Limites cancha V: ",canchaLimitsV);
@@ -170,12 +160,43 @@ function botonStart(e,estado,setEstado,setPosicionHporteria1,setPosicionHporteri
   setPosicionHporteria2(canchaLimitsH[1]);
 }
 
+// Botones del control por interfaz gráfica
+function botonRight(e,posicionHjugador1,setPosicionHjugador1,canchaLimitsH) {     // Límite derecha movimiento Doggy dentro del cuadrilátero
+  e.preventDefault();
+  if(posicionHjugador1 < canchaLimitsH[1]){
+    posicionHjugador1 = posicionHjugador1 + 10;
+    setPosicionHjugador1(posicionHjugador1);
+  }
+}
+function botonLeft(e,posicionHjugador1,setPosicionHjugador1,canchaLimitsH) {     // Límite derecha movimiento Doggy dentro del cuadrilátero
+  e.preventDefault();
+  if(posicionHjugador1 > canchaLimitsH[0]){
+    posicionHjugador1 = posicionHjugador1 - 10;
+    setPosicionHjugador1(posicionHjugador1);
+  }
+}
+function botonUp(e,posicionVjugador1,setPosicionVjugador1,canchaLimitsV) {     // Límite derecha movimiento Doggy dentro del cuadrilátero
+  e.preventDefault();
+  if(posicionVjugador1 > canchaLimitsV[0]){
+    posicionVjugador1= posicionVjugador1 - 10;
+    setPosicionVjugador1(posicionVjugador1);
+  }
+}
+function botonDown(e,posicionVjugador1,setPosicionVjugador1,canchaLimitsV) {     // Límite derecha movimiento Doggy dentro del cuadrilátero
+  e.preventDefault();
+  if(posicionVjugador1 < canchaLimitsV[1]){
+    posicionVjugador1= posicionVjugador1 + 10;
+    setPosicionVjugador1(posicionVjugador1);
+  }
+}
+
+// Manejo del Teclado
 function useTeclado(targetKey) {        // Hook que detecta el Teclado
   const [keyPressed, setKeyPressed] = useState(false);     // State for keeping track of whether key is pressed
-  function downHandler({key}) {       // If pressed key is our target key then set to true
+  function downHandler({key}) {         // If pressed key is our target key then set to true
     if (key === targetKey) { setKeyPressed(true); }
   }
-  const upHandler = ({key}) => {      // If released key is our target key then set to false
+  const upHandler = ({key}) => {        // If released key is our target key then set to false
     if (key === targetKey) { setKeyPressed(false); }
   };
   useEffect(() => {                     // Add event listeners
@@ -185,10 +206,10 @@ function useTeclado(targetKey) {        // Hook que detecta el Teclado
       window.removeEventListener("keydown", downHandler);
       window.removeEventListener("keyup", upHandler);
     };
-  }, []);             // Empty array ensures that effect is only run on mount and unmount
+  }, []);               // Empty array ensures that effect is only run on mount and unmount
   return keyPressed;
 }
-function flechasTeclado(e,posicionHjugador1,setPosicionHjugador1,posicionVjugador1,setPosicionVjugador1,posicionHjugador2,setPosicionHjugador2,posicionVjugador2,setPosicionVjugador2,posicionHbalon,setPosicionHbalon,posicionVbalon,setPosicionVbalon,posicionHporteria1,posicionVporteria1,posicionHporteria2,posicionVporteria2,golesEquipo1,setGolesEquipo1,golesEquipo2,setGolesEquipo2,posicionHjugadorCPU1,posicionVjugadorCPU1) {     //Función para sensar las flechas del teclado
+function flechasTeclado(e,posicionHjugador1,setPosicionHjugador1,posicionVjugador1,setPosicionVjugador1,posicionHbalon,setPosicionHbalon,posicionVbalon,setPosicionVbalon,posicionHporteria1,posicionVporteria1,posicionHporteria2,posicionVporteria2,golesEquipo1,setGolesEquipo1,golesEquipo2,setGolesEquipo2,posicionHjugadorCPU1,posicionVjugadorCPU1) {     //Función para sensar las flechas del teclado
   if (e.key === 'ArrowUp'){                  //Jugador 1
     if(posicionVjugador1 > canchaLimitsV[0]){
       posicionVjugador1= posicionVjugador1 - 10;
@@ -213,61 +234,27 @@ function flechasTeclado(e,posicionHjugador1,setPosicionHjugador1,posicionVjugado
       setPosicionHjugador1(posicionHjugador1);
     }
   }
-
-  // if (e.key === 'w'){                  //Jugador 2
-  //   if(posicionVjugador2 > canchaLimitsV[0]){
-  //     posicionVjugador2 = posicionVjugador2 - 10;
-  //     setPosicionVjugador2(posicionVjugador2);
-  //   }
-  // }   
-  // if (e.key === 's'){
-  //   if(posicionVjugador2 < canchaLimitsV[1]){
-  //     posicionVjugador2 = posicionVjugador2 + 10;
-  //     setPosicionVjugador2(posicionVjugador2);
-  //   }
-  // }
-  // if (e.key === 'a'){
-  //   if(posicionHjugador2 > canchaLimitsH[0]){
-  //     posicionHjugador2 = posicionHjugador2 - 10;
-  //     setPosicionHjugador2(posicionHjugador2);
-  //   }
-  // }   
-  // if (e.key === 'd'){
-  //   if(posicionHjugador2 < canchaLimitsH[1]){
-  //     posicionHjugador2 = posicionHjugador2 + 10;
-  //     setPosicionHjugador2(posicionHjugador2);
-  //   }
-  // }
-  checkPosicionBalon(e,posicionHbalon,setPosicionHbalon,posicionVbalon,setPosicionVbalon,posicionHjugador1,posicionVjugador1,posicionHjugador2,posicionVjugador2,posicionHjugadorCPU1,posicionVjugadorCPU1);
+  checkPosicionBalon(e,posicionHbalon,setPosicionHbalon,posicionVbalon,setPosicionVbalon,posicionHjugador1,posicionVjugador1,posicionHjugadorCPU1,posicionVjugadorCPU1);
 }
 
-function checkPosicionBalon(e,posicionHbalon,setPosicionHbalon,posicionVbalon,setPosicionVbalon,posicionHjugador1,posicionVjugador1,posicionHjugador2,posicionVjugador2,posicionHjugadorCPU1,posicionVjugadorCPU1) {
+function checkPosicionBalon(e,posicionHbalon,setPosicionHbalon,posicionVbalon,setPosicionVbalon,posicionHjugador1,posicionVjugador1,posicionHjugadorCPU1,posicionVjugadorCPU1) {
   if((posicionHbalon - 40  < posicionHjugador1 && posicionHjugador1 < posicionHbalon + 40) &&
      (posicionVbalon - 70  < posicionVjugador1 && posicionVjugador1 < posicionVbalon + 20)
   ){
     posicionHbalon = posicionHjugador1+24;
     posicionVbalon = posicionVjugador1+50;
   }
-  if((posicionHbalon - 40  < posicionHjugador2 && posicionHjugador2 < posicionHbalon + 40) &&
-     (posicionVbalon - 70  < posicionVjugador2 && posicionVjugador2 < posicionVbalon + 20)
-  ){
-    posicionHbalon = posicionHjugador2+24;
-    posicionVbalon = posicionVjugador2+50;
-  }
   if((posicionHbalon - 40  < posicionHjugadorCPU1 && posicionHjugadorCPU1 < posicionHbalon + 40) &&
      (posicionVbalon - 70  < posicionVjugadorCPU1 && posicionVjugadorCPU1 < posicionVbalon + 20)
   ){
-    posicionHbalon = posicionHjugadorCPU1+24;
-    posicionVbalon = posicionVjugadorCPU1+50;
+    posicionHbalon = posicionHjugadorCPU1-24;
+    posicionVbalon = posicionVjugadorCPU1;
   }
   setPosicionHbalon(posicionHbalon)
   setPosicionVbalon(posicionVbalon);
 }
 
-function checkGol(posicionHbalon,setPosicionHbalon,posicionVbalon,setPosicionVbalon,posicionHporteria1,posicionVporteria1,posicionHporteria2,posicionVporteria2,posicionHjugador1,setPosicionHjugador1,posicionVjugador1,setPosicionVjugador1,posicionHjugador2,setPosicionHjugador2,posicionVjugador2,setPosicionVjugador2,golesEquipo1,setGolesEquipo1,golesEquipo2,setGolesEquipo2) {
-  console.log("posicionHjugador1,posicionHjugador2: ",posicionHjugador1,posicionHjugador2)
-  console.log("posicionHporteria1,posicionVporteria1: ",posicionHporteria1,posicionVporteria1)
-  console.log("posicionHporteria2,posicionVporteria2: ",posicionHporteria2,posicionVporteria2)
+function checkGol(posicionHbalon,setPosicionHbalon,posicionVbalon,setPosicionVbalon,posicionHporteria1,posicionVporteria1,posicionHporteria2,posicionVporteria2,posicionHjugador1,setPosicionHjugador1,posicionVjugador1,setPosicionVjugador1,golesEquipo1,setGolesEquipo1,golesEquipo2,setGolesEquipo2) {
   if((posicionHbalon + 50 === posicionHporteria1) &&
     (posicionVporteria1 - 20  < posicionVbalon && posicionVbalon < posicionVporteria1 + 80)
   ){
@@ -277,16 +264,12 @@ function checkGol(posicionHbalon,setPosicionHbalon,posicionVbalon,setPosicionVba
     setPosicionHbalon(posicionHbalon)
     posicionVbalon = balonV;
     setPosicionVbalon(posicionVbalon);
-    posicionHjugador1 = jugador1H;
-    setPosicionHjugador1(posicionHjugador1);
-    posicionVjugador1 = jugador1V;
-    setPosicionVjugador1(posicionVjugador1);
-    posicionHjugador2 = jugador2H;
-    setPosicionHjugador2(posicionHjugador2);
-    posicionVjugador2 = jugador2V;
-    setPosicionVjugador2(posicionVjugador2);
+    // posicionHjugador1 = jugador1H;
+    // setPosicionHjugador1(posicionHjugador1);
+    // posicionVjugador1 = jugador1V;
+    // setPosicionVjugador1(posicionVjugador1);
   }
-  if((posicionHbalon - 50 === posicionHporteria2) &&
+  if((posicionHbalon - 24 === posicionHporteria2) &&
     (posicionVporteria2 - 20  < posicionVbalon && posicionVbalon < posicionVporteria2 + 80)
   ){
     golesEquipo1++;
@@ -295,20 +278,14 @@ function checkGol(posicionHbalon,setPosicionHbalon,posicionVbalon,setPosicionVba
     setPosicionHbalon(posicionHbalon)
     posicionVbalon = balonV;
     setPosicionVbalon(posicionVbalon);
-    posicionHjugador1 = jugador1H;
-    setPosicionHjugador1(posicionHjugador1);
-    posicionVjugador1 = jugador1V;
-    setPosicionVjugador1(posicionVjugador1);
-    posicionHjugador2 = jugador2H;
-    setPosicionHjugador2(posicionHjugador2);
-    posicionVjugador2 = jugador2V;
-    setPosicionVjugador2(posicionVjugador2);
+    // posicionHjugador1 = jugador1H;
+    // setPosicionHjugador1(posicionHjugador1);
+    // posicionVjugador1 = jugador1V;
+    // setPosicionVjugador1(posicionVjugador1);
   }
 }
 
 function movimientosJugadorCPU1(estado,posicionHbalon,setPosicionHbalon,posicionVbalon,setPosicionVbalon,posicionHjugadorCPU1,setPosicionHjugadorCPU1,posicionVjugadorCPU1,setPosicionVjugadorCPU1,posicionHporteria1,posicionVporteria1) {
-  console.log("posicionHjugadorCPU1,posicionVjugadorCPU1: ",posicionHjugadorCPU1,posicionVjugadorCPU1)
-
   if(estado === 'start'){
     if(posicionHbalon > posicionHjugadorCPU1 && posicionVbalon > posicionVjugadorCPU1){           //Hace que el Gusano persiga a Toto
       posicionHjugadorCPU1 = posicionHjugadorCPU1 + 1;
